@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  pod1:
+    image: solidproject/community-solid-server:latest
+    container_name: solid-pod-1
+    ports:
+      - "3001:3000" # Exposes pod1 on host port 3001
+    volumes:
+      - ./pod1/config/config-pod1.json:/config/config.json
+      - pod1-data:/data
+    environment:
+      - CSS_CONFIG=/config/config.json
+    restart: always
+  pod2:
+    image: solidproject/community-solid-server:latest
+    container_name: solid-pod-2
+    ports:
+      - "3002:3000" # Exposes pod2 on host port 3002
+    volumes:
+      - ./pod2/config/config-pod2.json:/config/config.json
+      - pod2-data:/data
+    environment:
+      - CSS_CONFIG=/config/config.json
+    restart: always
+
+  pod3:
+    image: solidproject/community-solid-server:latest
+    container_name: solid-pod-3
+    ports:
+      - "3003:3000" # Exposes pod3 on host port 3003
+    volumes:
+      - ./pod3/config/config-pod3.json:/config/config.json
+      - pod3-data:/data
+    environment:
+      - CSS_CONFIG=/config/config.json
+    restart: always
+
+  pod4:
+    image: solidproject/community-solid-server:latest
+    container_name: solid-pod-4
+    ports:
+      - "3004:3000" # Exposes pod4 on host port 3004
+    volumes:
+      - ./pod4/config/config-pod4.json:/config/config.json
+      - pod4-data:/data
+    environment:
+      - CSS_CONFIG=/config/config.json
+    restart: always
+
+  pod5:
+    image: solidproject/community-solid-server:latest
+    container_name: solid-pod-5
+    ports:
+      - "3005:3000" # Exposes pod5 on host port 3005
+    volumes:
+      - ./pod5/config/config-pod5.json:/config/config.json
+      - pod5-data:/data
+    environment:
+      - CSS_CONFIG=/config/config.json
+    restart: always
+
+volumes: # Used for data persistence
+  pod1-data:
+  pod2-data:
+  pod3-data:
+  pod4-data:
+  pod5-data:
