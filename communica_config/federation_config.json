@@ -1,0 +1,9 @@
+{
+    "sources": [
+        "http://solid_pod_1:3000/",
+        "http://solid_pod_2:3000/",
+        "http://solid_pod_3:3000/",
+        "http://solid_pod_4:3000/",
+        "http://solid_pod_5:3000/"
+    ]
+}
