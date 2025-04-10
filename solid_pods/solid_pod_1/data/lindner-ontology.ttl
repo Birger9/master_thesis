@@ -1,0 +1,46 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# --- Classes ---
+
+:Product a owl:Class ;
+    rdfs:label "Product"@en ;
+    rdfs:comment "A general class for products manufactured or handled."@en ;
+
+:Component a owl:Class ;
+    rdfs:label "Component"@en ;
+    rdfs:comment "A type of product."@en ;
+    rdfs:subClassOf :Product .
+
+:FloorTile a owl:Class ;
+    rdfs:label "Floor Tile"@en ;
+    rdfs:comment "A specific type of component: a floor tile."@en ;
+    rdfs:subClassOf :Component .
+
+# --- Properties ---
+
+:productID a owl:DatatypeProperty ;
+    rdfs:label "Product ID"@en ;
+    rdfs:comment "A unique identifier for the product."@en ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:string .
+
+:productFamily a owl:DatatypeProperty ;
+    rdfs:label "Product Family"@en ;
+    rdfs:comment "The family the product belongs to (e.g., NORTEC, LMD)."@en ;
+    rdfs:domain :Product ;
+    rdfs:range rdfs:Literal .
+
+:productName a owl:DatatypeProperty ;
+    rdfs:label "Product Name"@en ;
+    rdfs:comment "The specific name of the product."@en ;
+    rdfs:domain :Product ;
+    rdfs:range rdfs:Literal .
+
+:material a owl:DatatypeProperty ;
+    rdfs:label "Material"@en ;
+    rdfs:comment "The primary material composition of the component."@en ;
+    rdfs:domain :Component ;
+    rdfs:range rdfs:Literal .
