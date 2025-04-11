@@ -1,0 +1,37 @@
+@prefix : <https://riksbyggen.example.com/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# --- Classes ---
+
+:Building a owl:Class ;
+    rdfs:label "Building"@en ;
+    rdfs:comment "A general class for a building"@en .
+
+# --- Properties ---
+
+:buildingID a owl:DatatypeProperty ;
+    rdfs:label "Building ID"@en ;
+    rdfs:comment "A unique identifier for a building"@en .
+    rdfs:domain :Building ; 
+    rdfs:range xsd:string .
+
+:buildingName a owl:DatatypeProperty ; 
+    rdfs:label "Building Name"@en ;
+    rdfs:comment "The building name"@en .
+    rdfs:domain :Building ; 
+    rdfs:range rdfs:Literal .
+
+:address a owl:DatatypeProperty ; 
+    rdfs:label "Address"@en ;
+    rdfs:comment "The address of the building"@en .
+    rdfs:domain :Building ; 
+    rdfs:range rdfs:Literal .
+
+:city a owl:DatatypeProperty ; 
+    rdfs:label "City"@en ;
+    rdfs:comment "The city where the building is located"@en .
+    rdfs:domain :Building ; 
+    rdfs:range rdfs:Literal .
+
