@@ -1,24 +1,24 @@
 @prefix : <https://lindner.example.com/ontology#> .
-@prefix data: <https://pod.lindner.example.com/data/products/> .
+@prefix lindnerData: <https://pod.lindner.example.com/data/products/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-data:nortec-cs-tile a :FloorTile ;
+lindnerData:nortec-cs-tile a :FloorTile ;
     rdfs:label "NORTEC Raised Floor Tile"@en ;
     :productID "NORTEC-CS-01" ;
     :productFamily "NORTEC" ;
     :productName "NORTEC Raised Floor Tile" ;
     :material "Calcium Sulphate" .
 
-data:nortec-steel-pedestal a :Component ;
+lindnerData:nortec-steel-pedestal a :Component ;
     rdfs:label "NORTEC Steel Pedestal H200"@en ;
     :productID "NORTEC-PED-S" ;
     :productFamily "NORTEC" ;
     :productName "NORTEC Steel Pedestal H200" ;
     :material "Galvanised Steel" .
 
-data:lmd-ceiling-panel a :Component ;
+lindnerData:lmd-ceiling-panel a :Component ;
     rdfs:label "LMD Ceiling Panel"@en ;
     :productID "LMD-CP-01" ;
     :productFamily "LMD" ;

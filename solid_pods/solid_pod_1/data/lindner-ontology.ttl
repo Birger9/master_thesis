@@ -1,3 +1,4 @@
+@prefix : <https://lindner.example.com/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -8,6 +9,8 @@
 :Product a owl:Class ;
     rdfs:label "Product"@en ;
     rdfs:comment "A general class for products manufactured or handled."@en ;
+
+# --- Sub Classes ---
 
 :Component a owl:Class ;
     rdfs:label "Component"@en ;
