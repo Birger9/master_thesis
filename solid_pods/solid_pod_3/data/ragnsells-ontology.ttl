@@ -1,0 +1,34 @@
+@prefix : <https://ragnsells.example.com/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# --- Classes ----
+
+:RecyclingFacility a owl:Class ;
+    rdfs:label "Recycling Facility"@en ;
+    rdfs:comment "A general class for recycling facility"@en .
+
+:WasteContract a owl:Class ;
+    rdfs:label "Waste Contract"@en ;
+    rdfs:comment "A general class for waste contract"@en .
+
+# --- Properties ---
+
+:facilityName a owl:DatatypeProperty ; 
+    rdfs:label "Facility Name"@en ;
+    rdfs:comment "The name of the facility"@en ;
+    rdfs:domain :RecyclingFacility ; 
+    rdfs:range ; rdfs:Literal .
+
+:processesMaterial a owl:DatatypeProperty ; 
+    rdfs:label "Processes Material"@en ;
+    rdfs:comment "The name of the process material"@en ;
+    rdfs:domain :RecyclingFacility ; 
+    rdfs:range rdfs:Literal .
+
+:contractHolder a owl:DatatypeProperty ; 
+    rdfs:label "Contract Holder"@en ;
+    rdfs:comment "The name of the contract holder"@en ;
+    rdfs:domain :WasteContract ; 
+    rdfs:range rdfs:Literal .

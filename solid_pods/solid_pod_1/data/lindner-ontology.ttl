@@ -8,7 +8,7 @@
 
 :Product a owl:Class ;
     rdfs:label "Product"@en ;
-    rdfs:comment "A general class for products manufactured or handled."@en ;
+    rdfs:comment "A general class for products manufactured or handled."@en .
 
 # --- Sub Classes ---
 
