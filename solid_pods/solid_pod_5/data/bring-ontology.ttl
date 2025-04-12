@@ -1,0 +1,58 @@
+@prefix : <https://bring.example.com/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# --- Classes ---
+
+:TransportVehicle a owl:Class ;
+    rdfs:label "Transport Vehicle"@en ;
+    rdfs:commet "A general class for transport vehicles"@en .
+
+:TransportJob a owl:Class ;
+    rdfs:label "Transport Job"@en ;
+    rdfs:comment "A general class for transport jobs"@en .
+
+# --- Properties ---
+
+:vehicleID a owl:DatatypeProperty ; 
+    rdfs:label "Vehicle ID"@en ;
+    rdfs:commet "A unique identifier for a vehicle"@en ;
+    rdfs:domain :TransportVehicle ; 
+    rdfs:range xsd:string .
+
+:vehicleType a owl:DatatypeProperty ; 
+    rdfs:label "Vehicle Type"@en ;
+    rdfs:commet "The type of the vehicle"@en ;
+    rdfs:domain :TransportVehicle ; 
+    rdfs:range rdfs:Literal .
+
+:jobID a owl:DatatypeProperty ; 
+    rdfs:label "Job ID"@en ;
+    rdfs:commet "A unique identifier for a job"@en ;
+    rdfs:domain :TransportJob ; 
+    rdfs:range xsd:string .
+
+:originCity a owl:DatatypeProperty ; 
+    rdfs:label "Origin City"@en ;
+    rdfs:commet "The orgin city"@en ;
+    rdfs:domain :TransportJob ; 
+    rdfs:range rdfs:Literal .
+
+:destinationCity a owl:DatatypeProperty ; 
+    rdfs:label "Destination City"@en ;
+    rdfs:commet "The destination city"@en ;
+    rdfs:domain :TransportJob ; 
+    rdfs:range rdfs:Literal .
+
+:scheduledDate a owl:DatatypeProperty ; 
+    rdfs:label "Scheduled Date"@en ;
+    rdfs:commet "The scheduled date for a job"@en ;
+    rdfs:domain :TransportJob ; 
+    rdfs:range xsd:date .
+
+:assignedVehicle a owl:ObjectProperty ; 
+    rdfs:label "Assigned Vehicle"@en ;
+    rdfs:commet "The assigned vehicle to a job"@en ;
+    rdfs:domain :TransportJob ; 
+    rdfs:range :TransportVehicle .

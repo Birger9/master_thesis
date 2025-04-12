@@ -1,0 +1,33 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix logiOnt: <https://bring.example.com/ontology#> .
+@prefix logisticsData: <https://pod.bring.example.com/data/> .
+
+logisticsData:vehicles/etruck-01 a logiOnt:TransportVehicle ;
+    rdfs:label "Electric Truck CT-ETRUCK-01"@en ;
+    logiOnt:vehicleID "CT-ETRUCK-01" ;
+    logiOnt:vehicleType "Electric Truck" ;
+    logiOnt:payloadCapacityKg 10000 .
+
+logisticsData:vehicles/van-05 a logiOnt:TransportVehicle ;
+    rdfs:label "Diesel Van CT-VAN-05"@en ;
+    logiOnt:vehicleID "CT-VAN-05" ;
+    logiOnt:vehicleType "Diesel Van" ;
+    logiOnt:payloadCapacityKg 2000 .
+
+logisticsData:jobs/job-987 a logiOnt:TransportJob ;
+    rdfs:label "Transport Job TJ-2032-08-987 (Mannheim -> Frankfurt)"@en ;
+    logiOnt:jobID "TJ-2032-08-987" ;
+    logiOnt:originCity "Mannheim" ;
+    logiOnt:destinationCity "Frankfurt" ;
+    logiOnt:scheduledDate "2032-08-16"^^xsd:date ;
+    logiOnt:assignedVehicle logisticsData:vehicles/etruck-01 .
+
+logisticsData:jobs/job-988 a logiOnt:TransportJob ;
+    rdfs:label "Transport Job TJ-2032-08-988 (Frankfurt -> Stuttgart)"@en ;
+    logiOnt:jobID "TJ-2032-08-988" ;
+    logiOnt:originCity "Frankfurt" ;
+    logiOnt:destinationCity "Stuttgart" ;
+    logiOnt:scheduledDate "2032-08-18"^^xsd:date ;
+    logiOnt:assignedVehicle logisticsData:vehicles/van-05 .
