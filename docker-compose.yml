@@ -33,7 +33,7 @@ services:
 
   solid_pod_4:
     image: solidproject/community-server:latest
-    container_name: solid-pod-4
+    container_name: solid_pod_4
     ports:
       - "3004:3000" # Exposes pod4 on host port 3004
     volumes:
