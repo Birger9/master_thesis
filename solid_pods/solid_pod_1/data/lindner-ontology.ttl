@@ -17,11 +17,6 @@
     rdfs:comment "A type of product."@en ;
     rdfs:subClassOf :Product .
 
-:FloorTile a owl:Class ;
-    rdfs:label "Floor Tile"@en ;
-    rdfs:comment "A specific type of component: a floor tile."@en ;
-    rdfs:subClassOf :Component .
-
 # --- Properties ---
 
 :productID a owl:DatatypeProperty ;
