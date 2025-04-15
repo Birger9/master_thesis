@@ -1,8 +1,8 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix logiOnt: <https://bring.example.com/ontology#> .
-@prefix logisticsData: <https://pod.bring.example.com/data/> .
+@prefix logiOnt: <http://localhost:3005/ontology#> .
+@prefix logisticsData: <http://localhost:3005/data/> .
 
 logisticsData:vehicles/etruck-01 a logiOnt:TransportVehicle ;
     rdfs:label "Electric Truck CT-ETRUCK-01"@en ;

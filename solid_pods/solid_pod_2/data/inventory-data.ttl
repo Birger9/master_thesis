@@ -2,9 +2,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix concularOnt: <https://concular.example.com/ontology#> .
-@prefix lindnerProd: <https://pod.lindner.example.com/data/products/> . 
-@prefix concularData: <https://pod.concular.example.com/data/> .
+@prefix concularOnt: <http://localhost:3002/ontology#> .
+@prefix concularData: <http://localhost:3002/data/> .
+@prefix lindnerProd: <http://localhost:3001/data/> .
 
 concularData:locations/frankfurt-wh a concularOnt:StorageLocation ;
     rdfs:label "Concular Frankfurt Warehouse"@en ;

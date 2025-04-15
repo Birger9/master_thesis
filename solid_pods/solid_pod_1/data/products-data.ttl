@@ -1,5 +1,5 @@
-@prefix : <https://lindner.example.com/ontology#> .
-@prefix lindnerData: <https://pod.lindner.example.com/data/products/> .
+@prefix : <http://localhost:3001/ontology#> .
+@prefix lindnerData: <http://localhost:3001/data/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
