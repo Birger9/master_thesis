@@ -1,7 +1,7 @@
 services:
   solid_pod_1:
     image: solidproject/community-server:latest
-    container_name: solid_pod_1
+    container_name: solid-pod-1
     ports:
       - "3001:3000" # Exposes pod1 on host port 3001
     volumes:
@@ -11,7 +11,7 @@ services:
     restart: always
   solid_pod_2:
     image: solidproject/community-server:latest
-    container_name: solid_pod_2
+    container_name: solid-pod-2
     ports:
       - "3002:3000" # Exposes pod2 on host port 3002
     volumes:
@@ -22,7 +22,7 @@ services:
 
   solid_pod_3:
     image: solidproject/community-server:latest
-    container_name: solid_pod_3
+    container_name: solid-pod-3
     ports:
       - "3003:3000" # Exposes pod3 on host port 3003
     volumes:
@@ -33,7 +33,7 @@ services:
 
   solid_pod_4:
     image: solidproject/community-server:latest
-    container_name: solid_pod_4
+    container_name: solid-pod-4
     ports:
       - "3004:3000" # Exposes pod4 on host port 3004
     volumes:
@@ -44,7 +44,7 @@ services:
 
   solid_pod_5:
     image: solidproject/community-server:latest
-    container_name: solid_pod_5
+    container_name: solid-pod-5
     ports:
       - "3005:3000" # Exposes pod5 on host port 3005
     volumes:
