@@ -4,14 +4,14 @@
 @prefix buildingsOnt: <http://localhost:3004/ontology#> .
 @prefix buildingData: <http://localhost:3004/data/> .
 
-buildingData:buildings/mannheim-office a buildingsOnt:Building ;
+buildingData:buildings-mannheim-office a buildingsOnt:Building ;
     rdfs:label "Mannheim Central Office Tower"@en ;
     buildingsOnt:buildingID "MM-OFFICE-01" ;
     buildingsOnt:buildingName "Mannheim Central Office Tower" ;
     buildingsOnt:address "Hauptstrasse 1, 68159 Mannheim" ;
     buildingsOnt:city "Mannheim" .
 
-buildingData:buildings/frankfurt-hq a buildingsOnt:Building ;
+buildingData:buildings-frankfurt-hq a buildingsOnt:Building ;
     rdfs:label "Frankfurt HQ Building"@en ;
     buildingsOnt:buildingID "FFM-HQ-05" ;
     buildingsOnt:buildingName "Frankfurt HQ Building" ;

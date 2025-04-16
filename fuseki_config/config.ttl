@@ -1,0 +1,25 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tdb:   <http://jena.hpl.eu/TDB#> .
+@prefix sdb:   <http://jena.hpl.eu/SDB#> .
+@prefix ja:    <http://jena.hpl.eu/Jena#> .
+@prefix fuseki: <http://jena.apache.org/fuseki#> .
+
+[] rdf:type fuseki:Server ;
+   fuseki:services (
+     [ rdf:type fuseki:Service ;
+       fuseki:name "sparql" ;
+       fuseki:operation fuseki:query ;
+       fuseki:operation fuseki:update ;
+       fuseki:dataset fuseki:federatedDataset ;
+     ]
+   ) .
+
+# Define the federated dataset
+<#federatedDataset> rdf:type fuseki:FederatedDataset ;
+  fuseki:endpoint <http://localhost:3001/> ;
+  fuseki:endpoint <http://localhost:3002/> ;
+  fuseki:endpoint <http://localhost:3003/> ;
+  fuseki:endpoint <http://localhost:3004/> ;
+  fuseki:endpoint <http://localhost:3005/> ;
+.

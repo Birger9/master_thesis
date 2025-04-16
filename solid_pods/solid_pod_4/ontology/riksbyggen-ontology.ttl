@@ -13,25 +13,25 @@
 
 :buildingID a owl:DatatypeProperty ;
     rdfs:label "Building ID"@en ;
-    rdfs:comment "A unique identifier for a building"@en .
+    rdfs:comment "A unique identifier for a building"@en ;
     rdfs:domain :Building ; 
     rdfs:range xsd:string .
 
 :buildingName a owl:DatatypeProperty ; 
     rdfs:label "Building Name"@en ;
-    rdfs:comment "The building name"@en .
+    rdfs:comment "The building name"@en ;
     rdfs:domain :Building ; 
     rdfs:range rdfs:Literal .
 
 :address a owl:DatatypeProperty ; 
     rdfs:label "Address"@en ;
-    rdfs:comment "The address of the building"@en .
+    rdfs:comment "The address of the building"@en ;
     rdfs:domain :Building ; 
     rdfs:range rdfs:Literal .
 
 :city a owl:DatatypeProperty ; 
     rdfs:label "City"@en ;
-    rdfs:comment "The city where the building is located"@en .
+    rdfs:comment "The city where the building is located"@en ;
     rdfs:domain :Building ; 
     rdfs:range rdfs:Literal .
 

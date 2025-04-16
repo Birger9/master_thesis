@@ -6,55 +6,55 @@
 @prefix concularData: <http://localhost:3002/data/> .
 @prefix lindnerProd: <http://localhost:3001/data/> .
 
-concularData:locations/frankfurt-wh a concularOnt:StorageLocation ;
+concularData:locations-frankfurt-wh a concularOnt:StorageLocation ;
     rdfs:label "Concular Frankfurt Warehouse"@en ;
     concularOnt:warehouseName "Frankfurt Warehouse" .
 
-concularData:locations/munich-depot a concularOnt:StorageLocation ;
+concularData:locations-munich-depot a concularOnt:StorageLocation ;
     rdfs:label "Concular Munich Depot"@en ;
     concularOnt:warehouseName "Munich Depot" .
 
-concularData:assessments/assess-001 a concularOnt:ReusableAssessment ; 
+concularData:assessments-assess-001 a concularOnt:ReusableAssessment ; 
     rdfs:label "Assessment 001 (Result: Reusable)"@en .
 
-concularData:assessments/assess-002 a concularOnt:RecyclableAssessment ; 
+concularData:assessments-assess-002 a concularOnt:RecyclableAssessment ; 
     rdfs:label "Assessment 002 (Result: Recyclable)"@en .
 
-concularData:assessments/assess-003 a concularOnt:DamagedAssessment ; 
+concularData:assessments-assess-003 a concularOnt:DamagedAssessment ; 
     rdfs:label "Assessment 003 (Result: Damaged)"@en .
 
-concularData:items/batch-101 a concularOnt:InventoryItem ;
+concularData:items-batch-101 a concularOnt:InventoryItem ;
     rdfs:label "Batch 101: Reusable NORTEC Tiles"@en ;
     concularOnt:itemIdentifier "BATCH-101-NORTEC-TILES" ;
     concularOnt:componentType lindnerProd:nortec-cs-tile ;
     concularOnt:quantity 500 ;
-    concularOnt:currentAssessment concularData:assessments/assess-001 ;
+    concularOnt:currentAssessment concularData:assessments-assess-001 ;
     concularOnt:isAvailableForReuse true ;
-    concularOnt:storedAt concularData:locations/frankfurt-wh .
+    concularOnt:storedAt concularData:locations-frankfurt-wh .
 
-concularData:items/batch-102 a concularOnt:InventoryItem ;
+concularData:items-batch-102 a concularOnt:InventoryItem ;
     rdfs:label "Batch 102: Recyclable NORTEC Tiles"@en ;
     concularOnt:itemIdentifier "BATCH-102-NORTEC-TILES" ;
     concularOnt:componentType lindnerProd:nortec-cs-tile ;
     concularOnt:quantity 250 ;
-    concularOnt:currentAssessment concularData:assessments/assess-002 ;
+    concularOnt:currentAssessment concularData:assessments-assess-002 ;
     concularOnt:isAvailableForReuse false ;
-    concularOnt:storedAt concularData:locations/frankfurt-wh .
+    concularOnt:storedAt concularData:locations-frankfurt-wh .
 
-concularData:items/batch-201 a concularOnt:InventoryItem ;
+concularData:items-batch-201 a concularOnt:InventoryItem ;
     rdfs:label "Batch 201: Damaged LMD Panels"@en ;
     concularOnt:itemIdentifier "BATCH-201-LMD-PANELS" ;
     concularOnt:componentType lindnerProd:lmd-ceiling-panel ;
     concularOnt:quantity 100 ;
-    concularOnt:currentAssessment concularData:assessments/assess-003 ;
+    concularOnt:currentAssessment concularData:assessments-assess-003 ;
     concularOnt:isAvailableForReuse false ; 
-    concularOnt:storedAt concularData:locations/munich-depot .
+    concularOnt:storedAt concularData:locations-munich-depot .
 
-concularData:items/batch-301 a concularOnt:InventoryItem ;
+concularData:items-batch-301 a concularOnt:InventoryItem ;
     rdfs:label "Batch 301: Damaged NORTEC Pedestals"@en ;
     concularOnt:itemIdentifier "BATCH-301-NORTEC-PEDESTALS" ;
     concularOnt:componentType lindnerProd:nortec-steel-pedestal ;
     concularOnt:quantity 800 ;
-    concularOnt:currentAssessment concularData:assessments/assess-003 ;
+    concularOnt:currentAssessment concularData:assessments-assess-003 ;
     concularOnt:isAvailableForReuse false ; 
-    concularOnt:storedAt concularData:locations/munich-depot .
+    concularOnt:storedAt concularData:locations-munich-depot .

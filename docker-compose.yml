@@ -53,23 +53,6 @@ services:
       - DATA_PATH=/app/data
     restart: always
 
-# Communica CI Service: Runs Communica for SPARQL federation queries
-  communica:
-    image: comunica/query-sparql:latest
-    container_name: communica
-    ports:
-      - "4000:4000"
-    volumes:
-      - ./communica_config:/app/config
-    command: >
-      bash -c "communica-sparql -c /app/config/federation-config.json"
-    depends_on:
-      - solid_pod_1
-      - solid_pod_2
-      - solid_pod_3
-      - solid_pod_4
-      - solid_pod_5
-
   # Python Application Service: Sends SPARQL queries to the pods
   python_app:
     build: ./python_app
@@ -84,4 +67,3 @@ services:
       - solid_pod_3
       - solid_pod_4
       - solid_pod_5
-      - communica

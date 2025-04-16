@@ -4,11 +4,11 @@
 @prefix ragnsellsOnt: <http://localhost:3003/ontology#> .
 @prefix facilityData: <http://localhost:3003/data/> .
 
-facilityData:facilities/gypsum-plant a ragnsellsOnt:RecyclingFacility ;
+facilityData:facilities-gypsum-plant a ragnsellsOnt:RecyclingFacility ;
     rdfs:label "Main Gypsum Recycling Plant"@en ;
     ragnsellsOnt:facilityName "Main Gypsum Recycling Plant" ;
     ragnsellsOnt:processesMaterial "Calcium Sulphate" .
 
-facilityData:contracts/contract-123 a ragnsellsOnt:WasteContract ;
+facilityData:contracts-contract-123 a ragnsellsOnt:WasteContract ;
     rdfs:label "Waste Contract #123 (Some Construction Company)"@en ;
     ragnsellsOnt:contractHolder "Some Construction Company" .
