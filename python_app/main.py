@@ -116,16 +116,10 @@ def get_sparql_from_llm(prompt: str, client: AzureOpenAI, model: str) -> Optiona
                  "You are an expert in RDF, SPARQL, Solid Pods, and translating natural language to Federated SPARQL queries."},
                 {"role": "user", "content": prompt}
             ],
-            temperature=0.2,
-            max_tokens=1500,
+            max_completion_tokens=100000,
         )
+        
         query = response.choices[0].message.content.strip()
-
-        for fence in ("```sparql", "```json", "```"):
-            if query.startswith(fence):
-                query = query[len(fence):].strip()
-            if query.endswith("```"):
-                query = query[:-3].strip()
         return query
     except Exception as e:
         print(f"Error calling Azure OpenAI: {e}")
@@ -164,17 +158,17 @@ if __name__ == "__main__":
         exit(1)
 
     print(f"Loaded data for {len(pod_details)} pods.")
-    print(f"Loaded data is {pod_details} pods.")
-    #print("Building LLM prompt...")
-    #prompt = build_llm_prompt(NATURAL_LANGUAGE_QUESTION, pod_details)
+    #print(f"Loaded data is {pod_details} pods.")
+    print("Building LLM prompt...")
+    prompt = build_llm_prompt(NATURAL_LANGUAGE_QUESTION, pod_details)
 
-    #print("Sending prompt to Azure OpenAI...")
-    #sparql_query = get_sparql_from_llm(prompt, client, OPENAI_MODEL)
+    print("Sending prompt to Azure OpenAI...")
+    sparql_query = get_sparql_from_llm(prompt, client, OPENAI_MODEL)
 
-    #if not sparql_query:
-    #    print("Failed to generate SPARQL query. Exiting.")
-    #   exit(1)
+    if not sparql_query:
+        print("Failed to generate SPARQL query. Exiting.")
+        exit(1)
 
-    #print("--- Generated Federated SPARQL Query ---")
-    #print(sparql_query)
-    #print("--- End Query ---")
+    print("--- Generated Federated SPARQL Query ---")
+    print(sparql_query)
+    print("--- End Query ---")

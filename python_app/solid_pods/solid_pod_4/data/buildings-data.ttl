@@ -1,8 +1,8 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix buildingsOnt: <http://localhost:3004/ontology#> .
-@prefix buildingData: <http://localhost:3004/data/> .
+@prefix buildingsOnt: <http://solid-pod-4/ontology#> .
+@prefix buildingData: <http://solid-pod-4/data/> .
 
 buildingData:buildings-mannheim-office a buildingsOnt:Building ;
     rdfs:label "Mannheim Central Office Tower"@en ;

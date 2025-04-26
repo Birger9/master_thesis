@@ -1,8 +1,8 @@
-@prefix : <http://localhost:3002/ontology#> .
+@prefix : <http://solid-pod-2/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix lindnerOnt: <https://lindner.example.com/ontology#> .
+@prefix lindnerOnt: <https://solid-pod-1/ontology#> .
 
 # --- Classes ---
 
