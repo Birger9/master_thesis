@@ -17,9 +17,7 @@ if not all([AZURE_ENDPOINT, AZURE_API_KEY, DEPLOYMENT_NAME]):
     )
 
 OPENAI_MODEL = DEPLOYMENT_NAME
-SCRIPT_ROOT    = pathlib.Path(__file__).parent.resolve()
-base_subdir    = os.getenv("BASE_POD_DIR", "solid_pods")
-BASE_POD_DIR   = SCRIPT_ROOT / base_subdir
+BASE_POD_DIR = pathlib.Path(os.getenv("BASE_POD_DIR")) 
 NUM_PODS = int(os.getenv("NUM_PODS", "5"))
 NATURAL_LANGUAGE_QUESTION = "Which NORTEC components are available for reuse?"
 
@@ -136,8 +134,6 @@ def get_sparql_from_llm(prompt: str, client: AzureOpenAI, model: str) -> Optiona
 # --- Main Execution ---
 if __name__ == "__main__":
     print("Starting NL to Federated SPARQL Pipeline")
-    print(f"Using BASE_POD_DIR: {BASE_POD_DIR.resolve()}")
-
 
     client = AzureOpenAI(
         azure_endpoint=AZURE_ENDPOINT,
@@ -168,6 +164,7 @@ if __name__ == "__main__":
         exit(1)
 
     print(f"Loaded data for {len(pod_details)} pods.")
+    print(f"Loaded data is {pod_details} pods.")
     #print("Building LLM prompt...")
     #prompt = build_llm_prompt(NATURAL_LANGUAGE_QUESTION, pod_details)
 
