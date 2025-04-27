@@ -39,42 +39,42 @@
 
 :itemIdentifier a owl:DatatypeProperty;
     rdfs:label "Item Identifier"@en ;
-    rdfs:comment "A unique identifier for the item" @en ;
+    rdfs:comment "A unique identifier for the item"@en ;
     rdfs:domain :InventoryItem;
     rdfs:range xsd:string .
 
 :componentType a owl:ObjectProperty ;
     rdfs:label "Component Type"@en ;
-    rdfs:comment "The specific type of the item" @en ;
+    rdfs:comment "The specific type of the item"@en ;
     rdfs:domain :InventoryItem ;
     rdfs:range lindnerOnt:Product . 
 
 :quantity a owl:DatatypeProperty ;
     rdfs:label "Quantity"@en ;
-    rdfs:comment "The quantity of an item" @en ;
+    rdfs:comment "The quantity of an item"@en ;
     rdfs:domain :InventoryItem ;
     rdfs:range xsd:integer .
 
 :currentAssessment a owl:ObjectProperty ;
     rdfs:label "Current Assessment"@en ;
-    rdfs:comment "The current assessment of an item." @en ;
+    rdfs:comment "The current assessment of an item."@en ;
     rdfs:domain :InventoryItem ;
     rdfs:range :Assessment . 
 
 :isAvailableForReuse a owl:DatatypeProperty ;
     rdfs:label "Is Available For Reuse"@en ;
-    rdfs:comment "Tells whether an item is available for reuse" @en ;
+    rdfs:comment "Tells whether an item is available for reuse"@en ;
     rdfs:domain :InventoryItem ;
     rdfs:range xsd:boolean . 
 
 :storedAt a owl:ObjectProperty ;
     rdfs:label "Stored At"@en ;
-    rdfs:comment "Where items are stored" @en ;
+    rdfs:comment "Where items are stored"@en ;
     rdfs:domain :InventoryItem ;
     rdfs:range :StorageLocation .
 
 :warehouseName a owl:DatatypeProperty ;
     rdfs:label "Warehouse Name"@en ;
-    rdfs:comment "The name of the warehouse" @en ;
+    rdfs:comment "The name of the warehouse"@en ;
     rdfs:domain :StorageLocation ;
     rdfs:range rdfs:Literal .
