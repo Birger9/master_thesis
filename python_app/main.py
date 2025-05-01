@@ -168,6 +168,15 @@ if __name__ == "__main__":
         print("Failed to generate SPARQL query. Exiting.")
         exit(1)
 
+    output_file = SCRIPT_ROOT = pathlib.Path(__file__).parent / "generated_queries.txt"
+    try:
+        with open(output_file, "a", encoding="utf-8") as f:
+            f.write(sparql_query)
+            f.write("\n---\n")
+        print(f"Generated query appended to {output_file}")
+    except Exception as e:
+        print(f"Error writing to {output_file}: {e}")
+
     print("--- Generated Federated SPARQL Query ---")
     print(sparql_query)
     print("--- End Query ---")
