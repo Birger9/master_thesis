@@ -1,0 +1,44 @@
+--- Query #1 ---
+PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX concularOnt: <http://solid-pod-2/ontology#>
+
+SELECT DISTINCT ?component ?productName ?productID
+WHERE {
+  SERVICE <http://solid-pod-1/data/> {
+    ?component a lindnerOnt:Component ;
+               lindnerOnt:productFamily "NORTEC" ;
+               lindnerOnt:productName ?productName ;
+               lindnerOnt:productID ?productID .
+  }
+  SERVICE <http://solid-pod-2/data/> {
+    ?item a concularOnt:InventoryItem ;
+          concularOnt:componentType ?component ;
+          concularOnt:isAvailableForReuse true .
+  }
+}
+--- Results ---
+Error: 405 Client Error: Method Not Allowed for url: http://localhost:3030/#/dataset/solidpods/query
+
+--- Query #1 ---
+PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX concularOnt: <http://solid-pod-2/ontology#>
+
+SELECT DISTINCT ?component ?productName ?productID
+WHERE {
+  SERVICE <http://solid-pod-1/data/> {
+    ?component a lindnerOnt:Component ;
+               lindnerOnt:productFamily "NORTEC" ;
+               lindnerOnt:productName ?productName ;
+               lindnerOnt:productID ?productID .
+  }
+  SERVICE <http://solid-pod-2/data/> {
+    ?item a concularOnt:InventoryItem ;
+          concularOnt:componentType ?component ;
+          concularOnt:isAvailableForReuse true .
+  }
+}
+--- Results ---
+Error: 405 Client Error: Method Not Allowed for url: http://localhost:3030/#/dataset/solidpods/query
+

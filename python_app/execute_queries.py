@@ -1,0 +1,40 @@
+import requests
+from config import FUSEKI_ENDPOINT, GENERATED_QUERIES_FILE, GENERATED_RESULTS_FILE
+
+def run_generated_queries():
+    """
+    Reads federated SPARQL queries from GENERATED_QUERIES_FILE,
+    sends each query to the Fuseki endpoint (FUSEKI_ENDPOINT),
+    and appends the results to GENERATED_RESULTS_FILE.
+    """
+    try:
+        with open(GENERATED_QUERIES_FILE, 'r', encoding='utf-8') as f:
+            content = f.read()
+    except FileNotFoundError:
+        print(f"Queries file not found: {GENERATED_QUERIES_FILE}")
+        return
+
+    queries = [q.strip() for q in content.split('---') if q.strip()]
+
+    for idx, query in enumerate(queries, start=1):
+        print(f"Executing query #{idx}...")
+        try:
+            response = requests.post(
+                FUSEKI_ENDPOINT,
+                data={'query': query},
+                headers={'Accept': 'application/sparql-results+json', 'Content-Type': 'application/x-www-form-urlencoded'},
+            )
+            response.raise_for_status()
+            result_text = response.text
+
+        except Exception as e:
+            print(f"Error executing query #{idx}: {e}")
+            result_text = f"Error: {e}"
+
+        with open(GENERATED_RESULTS_FILE, 'a', encoding='utf-8') as out_f:
+            out_f.write(f"--- Query #{idx} ---\n")
+            out_f.write(query + "\n")
+            out_f.write("--- Results ---\n")
+            out_f.write(result_text + "\n\n")
+
+        print(f"Appended results for query #{idx} to {GENERATED_RESULTS_FILE}")
