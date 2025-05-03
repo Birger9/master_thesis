@@ -1,9 +1,6 @@
-import pathlib
 from typing import List, Dict
-import os
-
 from llm_utils import load_azure_client, read_ttl_files, call_llm
-from main import BASE_POD_DIR
+from config     import BASE_POD_DIR, NUM_PODS, GENERATED_QUERIES_FILE, GENERATED_NL_FILE
 from meta_data import POD_METADATA
 
 def build_sparql_to_nl_prompt(sparql_query: str, pod_details: List[Dict]) -> str:
@@ -23,19 +20,18 @@ def build_sparql_to_nl_prompt(sparql_query: str, pod_details: List[Dict]) -> str
     return prompt_head + background_intro + summary + prompt_tail
 
 def translate_sparql_to_nl():
-    generated_path = pathlib.Path(__file__).parent / "generated_queries.txt"
-    if not generated_path.exists():
-        print(f"No generated_queries.txt found at {generated_path}")
+    if not GENERATED_QUERIES_FILE.exists():
+        print(f"No generated_queries.txt found at {GENERATED_QUERIES_FILE}")
         return
 
     # read and split on our delimiter
-    raw = generated_path.read_text(encoding="utf-8")
+    raw = GENERATED_QUERIES_FILE.read_text(encoding="utf-8")
     queries = [q.strip() for q in raw.split("---") if q.strip()]
 
     print("Reading ontologies from Solid Pods")
 
     pod_details = []
-    for i in range(1, int(os.getenv("NUM_PODS","5"))+1):
+    for i in range(1, NUM_PODS+1):
         pod_key = f"solid_pod_{i}"
         pod_dir = BASE_POD_DIR / pod_key
         ont = read_ttl_files(pod_dir / "ontology")
@@ -61,14 +57,13 @@ def translate_sparql_to_nl():
         print("Sending prompt to Azure OpenAI...")
         nl = call_llm(client, model, prompt)
 
-        output_file = pathlib.Path(__file__).parent / "generated_nl.txt"
         try:
-            with open(output_file, "a", encoding="utf-8") as f:
+            with open(GENERATED_NL_FILE, "a", encoding="utf-8") as f:
                 f.write(nl)
                 f.write("\n---\n")
-            print(f"Generated NL appended to {output_file}")
+            print(f"Generated NL appended to {GENERATED_NL_FILE}")
         except Exception as e:
-            print(f"Error writing to {output_file}: {e}")
+            print(f"Error writing to {GENERATED_NL_FILE}: {e}")
 
         print("--- Generated Natural Language ---") 
         print(nl)

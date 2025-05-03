@@ -1,10 +1,7 @@
-import pathlib
 from typing import List, Dict
-import os
-
 from llm_utils import load_azure_client, read_ttl_files, call_llm
 from meta_data import POD_METADATA
-from main import BASE_POD_DIR
+from config import BASE_POD_DIR, NUM_PODS, NATURAL_LANGUAGE_QUESTION, GENERATED_QUERIES_FILE
 
 NATURAL_LANGUAGE_QUESTION = "Which NORTEC components are available for reuse?"
 
@@ -41,7 +38,7 @@ def translate_nl_to_sparql():
     print("Reading TTL data from Solid Pods")
 
     pod_details = []
-    for i in range(1, int(os.getenv("NUM_PODS","5"))+1):
+    for i in range(1, NUM_PODS+1):
         pod_key = f"solid_pod_{i}"
         pod_dir = BASE_POD_DIR / pod_key
         ont = read_ttl_files(pod_dir / "ontology")
@@ -70,14 +67,13 @@ def translate_nl_to_sparql():
     print("Sending prompt to Azure OpenAI...")
     sparql_query = call_llm(client, model, prompt)
 
-    output_file = pathlib.Path(__file__).parent / "generated_queries.txt"
     try:
-        with open(output_file, "a", encoding="utf-8") as f:
+        with open(GENERATED_QUERIES_FILE, "a", encoding="utf-8") as f:
             f.write(sparql_query)
             f.write("\n---\n")
-        print(f"Generated query appended to {output_file}")
+        print(f"Generated query appended to {GENERATED_QUERIES_FILE}")
     except Exception as e:
-        print(f"Error writing to {output_file}: {e}")
+        print(f"Error writing to {GENERATED_QUERIES_FILE}: {e}")
 
     print("--- Generated Federated SPARQL Query ---") 
     print(sparql_query)
