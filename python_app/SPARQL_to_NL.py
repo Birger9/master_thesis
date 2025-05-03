@@ -3,8 +3,8 @@ from typing import List, Dict
 import os
 
 from llm_utils import load_azure_client, read_ttl_files, call_llm
-from python_app.main import BASE_POD_DIR
-from python_app.meta_data import POD_METADATA
+from main import BASE_POD_DIR
+from meta_data import POD_METADATA
 
 def build_sparql_to_nl_prompt(sparql_query: str, pod_details: List[Dict]) -> str:
     prompt_head = (
@@ -22,7 +22,16 @@ def build_sparql_to_nl_prompt(sparql_query: str, pod_details: List[Dict]) -> str
     prompt_tail += "Output just the plain English description of what this query does."
     return prompt_head + background_intro + summary + prompt_tail
 
-def translate_sparql_to_nl(sparql_query: str):
+def translate_sparql_to_nl():
+    generated_path = pathlib.Path(__file__).parent / "generated_queries.txt"
+    if not generated_path.exists():
+        print(f"No generated_queries.txt found at {generated_path}")
+        return
+
+    # read and split on our delimiter
+    raw = generated_path.read_text(encoding="utf-8")
+    queries = [q.strip() for q in raw.split("---") if q.strip()]
+
     print("Reading ontologies from Solid Pods")
 
     pod_details = []
@@ -45,21 +54,22 @@ def translate_sparql_to_nl(sparql_query: str):
     print(f"Loaded data for {len(pod_details)} pods.")
     client, model = load_azure_client()
 
-    print("Building LLM prompt...")
-    prompt = build_sparql_to_nl_prompt(sparql_query, pod_details)
+    for sparql in queries:
+        print("Building LLM prompt...")
+        prompt = build_sparql_to_nl_prompt(sparql, pod_details)
+            
+        print("Sending prompt to Azure OpenAI...")
+        nl = call_llm(client, model, prompt)
 
-    print("Sending prompt to Azure OpenAI...")
-    nl = call_llm(client, model, prompt)
+        output_file = pathlib.Path(__file__).parent / "generated_nl.txt"
+        try:
+            with open(output_file, "a", encoding="utf-8") as f:
+                f.write(nl)
+                f.write("\n---\n")
+            print(f"Generated NL appended to {output_file}")
+        except Exception as e:
+            print(f"Error writing to {output_file}: {e}")
 
-    output_file = pathlib.Path(__file__).parent / "generated_nl.txt"
-    try:
-        with open(output_file, "a", encoding="utf-8") as f:
-            f.write(nl)
-            f.write("\n---\n")
-        print(f"Generated NL appended to {output_file}")
-    except Exception as e:
-        print(f"Error writing to {output_file}: {e}")
-
-    print("--- Generated Natural Language ---") 
-    print(nl)
-    print("--- End ---")
+        print("--- Generated Natural Language ---") 
+        print(nl)
+        print("--- End ---")

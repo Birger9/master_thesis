@@ -3,7 +3,7 @@ from typing import List, Dict
 import os
 
 from llm_utils import load_azure_client, read_ttl_files, call_llm
-from python_app.meta_data import POD_METADATA
+from meta_data import POD_METADATA
 from main import BASE_POD_DIR
 
 NATURAL_LANGUAGE_QUESTION = "Which NORTEC components are available for reuse?"
