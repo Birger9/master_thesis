@@ -6,7 +6,7 @@ load_dotenv()
 
 BASE_POD_DIR = pathlib.Path(os.getenv("BASE_POD_DIR", "."))
 NUM_PODS = int(os.getenv("NUM_PODS", "5"))
-FUSEKI_ENDPOINT = os.getenv("FUSEKI_ENDPOINT", "http://localhost:3030/solidpods/query")
+FUSEKI_ENDPOINT = os.getenv("FUSEKI_ENDPOINT", "http://localhost:3030/solid-pod-1/sparql")
 
 NATURAL_LANGUAGE_QUESTION = "Which NORTEC components are available for reuse?"
 

@@ -1,44 +1,33 @@
 --- Query #1 ---
-PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
+PREFIX lind: <http://solid-pod-1/ontology#>
+PREFIX conc: <http://solid-pod-2/ontology#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX concularOnt: <http://solid-pod-2/ontology#>
 
-SELECT DISTINCT ?component ?productName ?productID
+SELECT DISTINCT ?component ?componentName
 WHERE {
-  SERVICE <http://solid-pod-1/data/> {
-    ?component a lindnerOnt:Component ;
-               lindnerOnt:productFamily "NORTEC" ;
-               lindnerOnt:productName ?productName ;
-               lindnerOnt:productID ?productID .
+  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
+    ?component a lind:Component ;
+               lind:productFamily "NORTEC" ;
+               rdfs:label ?componentName .
   }
-  SERVICE <http://solid-pod-2/data/> {
-    ?item a concularOnt:InventoryItem ;
-          concularOnt:componentType ?component ;
-          concularOnt:isAvailableForReuse true .
+  SERVICE <http://localhost:3030/solid-pod-2/sparql> {
+    ?inventoryItem a conc:InventoryItem ;
+                   conc:componentType ?component ;
+                   conc:isAvailableForReuse true .
   }
 }
 --- Results ---
-Error: 405 Client Error: Method Not Allowed for url: http://localhost:3030/#/dataset/solidpods/query
-
---- Query #1 ---
-PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX concularOnt: <http://solid-pod-2/ontology#>
-
-SELECT DISTINCT ?component ?productName ?productID
-WHERE {
-  SERVICE <http://solid-pod-1/data/> {
-    ?component a lindnerOnt:Component ;
-               lindnerOnt:productFamily "NORTEC" ;
-               lindnerOnt:productName ?productName ;
-               lindnerOnt:productID ?productID .
-  }
-  SERVICE <http://solid-pod-2/data/> {
-    ?item a concularOnt:InventoryItem ;
-          concularOnt:componentType ?component ;
-          concularOnt:isAvailableForReuse true .
+{ "head": {
+    "vars": [ "component" , "componentName" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "component": { "type": "uri" , "value": "http://solid-pod-1/data/nortec-cs-tile" } ,
+        "componentName": { "type": "literal" , "xml:lang": "en" , "value": "NORTEC Raised Floor Tile" }
+      }
+    ]
   }
 }
---- Results ---
-Error: 405 Client Error: Method Not Allowed for url: http://localhost:3030/#/dataset/solidpods/query
+
 
