@@ -1,9 +1,7 @@
 from typing import List, Dict
 from llm_utils import load_azure_client, read_ttl_files, call_llm
 from meta_data import POD_METADATA
-from config import BASE_POD_DIR, NUM_PODS, NATURAL_LANGUAGE_QUESTION, GENERATED_QUERIES_FILE
-
-NATURAL_LANGUAGE_QUESTION = "Which NORTEC components are available for reuse?"
+from config import BASE_POD_DIR, NUM_PODS, GENERATED_QUERIES_FILE
 
 def build_nl_to_sparql_prompt(nl_question: str, pod_details: List[Dict]) -> str:
     """Constructs the prompt for the LLM based on the template.""" 
@@ -34,7 +32,7 @@ def build_nl_to_sparql_prompt(nl_question: str, pod_details: List[Dict]) -> str:
     )
     return prompt_head + background_intro + pod_summaries + pod_urls + pod_data_details + prompt_tail
 
-def translate_nl_to_sparql():
+def translate_nl_to_sparql(nl_question: str):
     print("Reading TTL data from Solid Pods")
 
     pod_details = []
@@ -62,7 +60,7 @@ def translate_nl_to_sparql():
     client, model = load_azure_client()
 
     print("Building LLM prompt...")
-    prompt = build_nl_to_sparql_prompt(NATURAL_LANGUAGE_QUESTION, pod_details)
+    prompt = build_nl_to_sparql_prompt(nl_question, pod_details)
 
     print("Sending prompt to Azure OpenAI...")
     sparql_query = call_llm(client, model, prompt)
@@ -78,3 +76,4 @@ def translate_nl_to_sparql():
     print("--- Generated Federated SPARQL Query ---") 
     print(sparql_query)
     print("--- End Query ---")
+    return sparql_query

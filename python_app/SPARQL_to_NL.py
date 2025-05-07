@@ -1,6 +1,6 @@
 from typing import List, Dict
 from llm_utils import load_azure_client, read_ttl_files, call_llm
-from config     import BASE_POD_DIR, NUM_PODS, GENERATED_QUERIES_FILE, GENERATED_NL_FILE
+from config import BASE_POD_DIR, NUM_PODS, GENERATED_QUERIES_FILE, GENERATED_NL_FILE
 from meta_data import POD_METADATA
 
 def build_sparql_to_nl_prompt(sparql_query: str, pod_details: List[Dict]) -> str:
@@ -19,17 +19,9 @@ def build_sparql_to_nl_prompt(sparql_query: str, pod_details: List[Dict]) -> str
     prompt_tail += "Output just the plain English description of what this query does."
     return prompt_head + background_intro + summary + prompt_tail
 
-def translate_sparql_to_nl():
-    if not GENERATED_QUERIES_FILE.exists():
-        print(f"No generated_queries.txt found at {GENERATED_QUERIES_FILE}")
-        return
-
-    # read and split on our delimiter
-    raw = GENERATED_QUERIES_FILE.read_text(encoding="utf-8")
-    queries = [q.strip() for q in raw.split("---") if q.strip()]
-
+def translate_sparql_to_nl(sparql: str):
+    
     print("Reading ontologies from Solid Pods")
-
     pod_details = []
     for i in range(1, NUM_PODS+1):
         pod_key = f"solid_pod_{i}"
@@ -50,21 +42,21 @@ def translate_sparql_to_nl():
     print(f"Loaded data for {len(pod_details)} pods.")
     client, model = load_azure_client()
 
-    for sparql in queries:
-        print("Building LLM prompt...")
-        prompt = build_sparql_to_nl_prompt(sparql, pod_details)
-            
-        print("Sending prompt to Azure OpenAI...")
-        nl = call_llm(client, model, prompt)
+    print("Building LLM prompt...")
+    prompt = build_sparql_to_nl_prompt(sparql, pod_details)
+        
+    print("Sending prompt to Azure OpenAI...")
+    nl = call_llm(client, model, prompt)
 
-        try:
-            with open(GENERATED_NL_FILE, "a", encoding="utf-8") as f:
-                f.write(nl)
-                f.write("\n---\n")
-            print(f"Generated NL appended to {GENERATED_NL_FILE}")
-        except Exception as e:
-            print(f"Error writing to {GENERATED_NL_FILE}: {e}")
+    try:
+        with open(GENERATED_NL_FILE, "a", encoding="utf-8") as f:
+            f.write(nl)
+            f.write("\n---\n")
+        print(f"Generated NL appended to {GENERATED_NL_FILE}")
+    except Exception as e:
+        print(f"Error writing to {GENERATED_NL_FILE}: {e}")
 
-        print("--- Generated Natural Language ---") 
-        print(nl)
-        print("--- End ---")
+    print("--- Generated Natural Language ---") 
+    print(nl)
+    print("--- End ---")
+    return nl
