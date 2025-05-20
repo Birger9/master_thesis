@@ -1,0 +1,104 @@
+@prefix con: <http://solid-pod-0/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# --- Classes ---
+
+con:Product
+    a owl:Class ;
+    rdfs:label "Product"@en ;
+    rdfs:comment "General concept of a product used in construction."@en ;
+    rdfs:subClassOf product:Product .
+
+con:Component
+    a owl:Class ;
+    rdfs:label "Component"@en ;
+    rdfs:comment "A component or part of a product."@en ;
+    rdfs:subClassOf con:Product .
+
+con:InventoryItem
+    a owl:Class ;
+    rdfs:label "Inventory Item"@en ;
+    rdfs:comment "An item stored in inventory for construction."@en .
+
+con:StorageLocation
+    a owl:Class ;
+    rdfs:label "Storage Location"@en ;
+    rdfs:comment "A physical location where inventory items are stored."@en .
+
+con:Assessment
+    a owl:Class ;
+    rdfs:label "Assessment"@en ;
+    rdfs:comment "An evaluation or condition of an inventory item."@en .
+
+# --- Assessment Subclasses ---
+
+con:ReusableAssessment
+    a owl:Class ;
+    rdfs:label "Reusable Assessment"@en ;
+    rdfs:comment "Indicates the item is suitable for reuse."@en ;
+    rdfs:subClassOf con:Assessment .
+
+con:RecyclableAssessment
+    a owl:Class ;
+    rdfs:label "Recyclable Assessment"@en ;
+    rdfs:comment "Indicates the item is suitable for recycling."@en ;
+    rdfs:subClassOf con:Assessment .
+
+con:DamagedAssessment
+    a owl:Class ;
+    rdfs:label "Damaged Assessment"@en ;
+    rdfs:comment "Indicates the item is damaged beyond reuse or recycling."@en ;
+    rdfs:subClassOf con:Assessment .
+
+# --- Properties ---
+
+con:itemIdentifier
+    a owl:DatatypeProperty ;
+    rdfs:label "Item Identifier"@en ;
+    rdfs:comment "Unique identifier for an inventory item."@en ;
+    rdfs:domain con:InventoryItem ;
+    rdfs:range xsd:string .
+
+con:componentType
+    a owl:ObjectProperty ;
+    rdfs:label "Component Type"@en ;
+    rdfs:comment "Links an inventory item to its component type."@en ;
+    rdfs:domain con:InventoryItem ;
+    rdfs:range con:Component .
+
+con:quantity
+    a owl:DatatypeProperty ;
+    rdfs:label "Quantity"@en ;
+    rdfs:comment "Number of units in the inventory item."@en ;
+    rdfs:domain con:InventoryItem ;
+    rdfs:range xsd:integer .
+
+con:currentAssessment
+    a owl:ObjectProperty ;
+    rdfs:label "Current Assessment"@en ;
+    rdfs:comment "The current assessment of an inventory item."@en ;
+    rdfs:domain con:InventoryItem ;
+    rdfs:range con:Assessment .
+
+con:isAvailableForReuse
+    a owl:DatatypeProperty ;
+    rdfs:label "Is Available for Reuse"@en ;
+    rdfs:comment "Whether the inventory item is available for reuse."@en ;
+    rdfs:domain con:InventoryItem ;
+    rdfs:range xsd:boolean .
+
+con:storedAt
+    a owl:ObjectProperty ;
+    rdfs:label "Stored At"@en ;
+    rdfs:comment "The storage location of an inventory item."@en ;
+    rdfs:domain con:InventoryItem ;
+    rdfs:range con:StorageLocation .
+
+con:warehouseName
+    a owl:DatatypeProperty ;
+    rdfs:label "Warehouse Name"@en ;
+    rdfs:comment "Name of the storage location."@en ;
+    rdfs:domain con:StorageLocation ;
+    rdfs:range xsd:string .

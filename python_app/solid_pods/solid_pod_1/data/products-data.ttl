@@ -1,26 +1,30 @@
-@prefix : <http://solid-pod-1/ontology#> .
+@prefix lindnerOnt: <http://solid-pod-1/ontology#> .
+@prefix con: <http://solid-pod-0/ontology#> .
 @prefix lindnerData: <http://solid-pod-1/data/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-lindnerData:nortec-cs-tile a :Component ;
+lindnerData:nortec-cs-tile
+    a lindnerOnt:Component ;
     rdfs:label "NORTEC Raised Floor Tile"@en ;
-    :productID "NORTEC-CS-01" ;
-    :productFamily "NORTEC" ;
-    :productName "NORTEC Raised Floor Tile" ;
-    :material "Calcium Sulphate" .
+    lindnerOnt:productID "NORTEC-CS-01" ;
+    lindnerOnt:productFamily "NORTEC" ;
+    lindnerOnt:productName "NORTEC Raised Floor Tile" ;
+    lindnerOnt:material "Calcium Sulphate" .
 
-lindnerData:nortec-steel-pedestal a :Component ;
+lindnerData:nortec-steel-pedestal
+    a lindnerOnt:Component ;
     rdfs:label "NORTEC Steel Pedestal H200"@en ;
-    :productID "NORTEC-PED-S" ;
-    :productFamily "NORTEC" ;
-    :productName "NORTEC Steel Pedestal H200" ;
-    :material "Galvanised Steel" .
+    lindnerOnt:productID "NORTEC-PED-S" ;
+    lindnerOnt:productFamily "NORTEC" ;
+    lindnerOnt:productName "NORTEC Steel Pedestal H200" ;
+    lindnerOnt:material "Galvanised Steel" .
 
-lindnerData:lmd-ceiling-panel a :Component ;
+lindnerData:lmd-ceiling-panel
+    a lindnerOnt:Component ;
     rdfs:label "LMD Ceiling Panel"@en ;
-    :productID "LMD-CP-01" ;
-    :productFamily "LMD" ;
-    :productName "LMD Ceiling Panel" ;
-    :material "Aluminum" .
+    lindnerOnt:productID "LMD-CP-01" ; 
+    lindnerOnt:productFamily "LMD" ;
+    lindnerOnt:productName "LMD Ceiling Panel" ;
+    lindnerOnt:material "Aluminum" .

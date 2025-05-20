@@ -1,44 +1,51 @@
-@prefix : <http://solid-pod-1/ontology#> .
+@prefix lindnerOnt: <http://solid-pod-1/ontology#> .
+@prefix con: <http://solid-pod-0/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # --- Classes ---
 
-:Product a owl:Class ;
+lindnerOnt:Product
+    a owl:Class ;
     rdfs:label "Product"@en ;
-    rdfs:comment "A general class for products manufactured or handled."@en .
+    rdfs:comment "Company-specific product class."@en ;
+    rdfs:subClassOf con:Product .
 
-# --- Sub Classes ---
-
-:Component a owl:Class ;
+lindnerOnt:Component
+    a owl:Class ;
     rdfs:label "Component"@en ;
-    rdfs:comment "A type of product."@en ;
-    rdfs:subClassOf :Product .
+    rdfs:comment "A type of product specific to Lindner."@en ;
+    rdfs:subClassOf con:Component ;
+    rdfs:subClassOf lindnerOnt:Product .
 
 # --- Properties ---
 
-:productID a owl:DatatypeProperty ;
+lindnerOnt:productID
+    a owl:DatatypeProperty ;
     rdfs:label "Product ID"@en ;
     rdfs:comment "A unique identifier for the product."@en ;
-    rdfs:domain :Product ;
-    rdfs:range xsd:string .
+    rdfs:domain lindnerOnt:Product ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf con:itemIdentifier .
 
-:productFamily a owl:DatatypeProperty ;
+lindnerOnt:productFamily
+    a owl:DatatypeProperty ;
     rdfs:label "Product Family"@en ;
     rdfs:comment "The family the product belongs to (e.g., NORTEC, LMD)."@en ;
-    rdfs:domain :Product ;
+    rdfs:domain lindnerOnt:Product ;
     rdfs:range rdfs:Literal .
 
-:productName a owl:DatatypeProperty ;
+lindnerOnt:productName
+    a owl:DatatypeProperty ;
     rdfs:label "Product Name"@en ;
     rdfs:comment "The specific name of the product."@en ;
-    rdfs:domain :Product ;
+    rdfs:domain lindnerOnt:Product ;
     rdfs:range rdfs:Literal .
 
-:material a owl:DatatypeProperty ;
+lindnerOnt:material
+    a owl:DatatypeProperty ;
     rdfs:label "Material"@en ;
     rdfs:comment "The primary material composition of the component."@en ;
-    rdfs:domain :Component ;
+    rdfs:domain lindnerOnt:Component ;
     rdfs:range rdfs:Literal .
