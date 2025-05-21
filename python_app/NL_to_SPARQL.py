@@ -16,7 +16,7 @@ def build_nl_to_sparql_prompt(nl_question: str, pod_details: List[Dict]) -> str:
     pod_data_details = "\nSolid Pods Data:\n"
 
     for i, pod in enumerate(pod_details):
-        idx = i + 1
+        idx = i 
         pod_summaries += (f"Pod {idx} - {pod['name']}: {pod['description']}\n"
                         f"  Ontology URL: {pod['ontology_url']}\n"
                         f"  Data URL: {pod['data_url']}\n")
@@ -36,7 +36,7 @@ def translate_nl_to_sparql(nl_question: str):
     print("Reading TTL data from Solid Pods")
 
     pod_details = []
-    for i in range(1, NUM_PODS+1):
+    for i in range(0, NUM_PODS+1):
         pod_key = f"solid_pod_{i}"
         pod_dir = BASE_POD_DIR / pod_key
         ont = read_ttl_files(pod_dir / "ontology")
@@ -61,6 +61,7 @@ def translate_nl_to_sparql(nl_question: str):
 
     print("Building LLM prompt...")
     prompt = build_nl_to_sparql_prompt(nl_question, pod_details)
+    print(prompt)
 
     print("Sending prompt to Azure OpenAI...")
     sparql_query = call_llm(client, model, prompt)

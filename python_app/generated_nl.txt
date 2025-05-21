@@ -1,2 +1,0 @@
-This query retrieves all unique components that meet two conditions. First, it selects components from Pod 1 (using the Lindner ontology) that belong to the "NORTEC" product family and have a label (i.e., a name). Then, it checks Pod 2 (using the Concular ontology) for inventory items that use those components as their type and are available for reuse. The query returns the component along with its name.
----
