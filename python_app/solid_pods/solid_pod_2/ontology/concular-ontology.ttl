@@ -1,37 +1,34 @@
 @prefix concularOnt: <http://solid-pod-2/ontology#> .
 @prefix con: <http://solid-pod-0/ontology#> .
+@prefix owl:          <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:         <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # --- Classes ---
 
-concularOnt:InventoryItem
-    a owl:Class ;
+concularOnt:InventoryItem a owl:Class ;
     rdfs:label "Inventory Item"@en ;
     rdfs:comment "A Concular inventory item."@en ;
     rdfs:subClassOf con:InventoryItem .
 
-concularOnt:StorageLocation
-    a owl:Class ;
+concularOnt:StorageLocation a owl:Class ;
     rdfs:label "Storage Location"@en ;
     rdfs:comment "A Concular storage location."@en ;
     rdfs:subClassOf con:StorageLocation .
 
-concularOnt:Assessment
-    a owl:Class ;
+concularOnt:Assessment a owl:Class ;
     rdfs:label "Assessment"@en ;
     rdfs:comment "A Concular assessment."@en ;
     rdfs:subClassOf con:Assessment .
 
-concularOnt:ReusableAssessment
-    a owl:Class ;
+concularOnt:ReusableAssessment a owl:Class ;
     rdfs:label "Concular’s Reusable Assessment"@en ;
     rdfs:subClassOf con:ReusableAssessment .
 
-concularOnt:RecyclableAssessment
-    a owl:Class ;
+concularOnt:RecyclableAssessment a owl:Class ;
     rdfs:label "Concular’s Recyclable Assessment"@en ;
     rdfs:subClassOf con:RecyclableAssessment .
 
-concularOnt:DamagedAssessment
-    a owl:Class ;
+concularOnt:DamagedAssessment a owl:Class ;
     rdfs:label "Concular’s Damaged Assessment"@en ;
     rdfs:subClassOf con:DamagedAssessment .

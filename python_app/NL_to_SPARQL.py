@@ -61,7 +61,6 @@ def translate_nl_to_sparql(nl_question: str):
 
     print("Building LLM prompt...")
     prompt = build_nl_to_sparql_prompt(nl_question, pod_details)
-    print(prompt)
 
     print("Sending prompt to Azure OpenAI...")
     sparql_query = call_llm(client, model, prompt)

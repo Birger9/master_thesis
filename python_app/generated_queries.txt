@@ -1,0 +1,19 @@
+PREFIX con: <http://solid-pod-0/ontology#>
+PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
+PREFIX concularOnt: <http://solid-pod-2/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?component ?componentLabel
+WHERE {
+  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
+    ?component a lindnerOnt:Component ;
+               lindnerOnt:productFamily "NORTEC" ;
+               rdfs:label ?componentLabel .
+  }
+  SERVICE <http://localhost:3030/solid-pod-2/sparql> {
+    ?inventoryItem a concularOnt:InventoryItem ;
+                   con:componentType ?component ;
+                   con:isAvailableForReuse true .
+  }
+}
+---
