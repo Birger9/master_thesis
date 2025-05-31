@@ -102,3 +102,19 @@ con:warehouseName
     rdfs:comment "Name of the storage location."@en ;
     rdfs:domain con:StorageLocation ;
     rdfs:range xsd:string .
+
+con:productID
+    a owl:DatatypeProperty ;
+    rdfs:label "Product ID"@en ;
+    rdfs:comment "Unique identifier for any product or component."@en ;
+    rdfs:domain con:Product ;
+    rdfs:range xsd:string .
+
+con:material
+    a owl:DatatypeProperty ;
+    rdfs:label "Material"@en ;
+    rdfs:comment "Primary material composition of a component."@en ;
+    rdfs:domain con:Component ;
+    rdfs:range rdfs:Literal .
+
+    

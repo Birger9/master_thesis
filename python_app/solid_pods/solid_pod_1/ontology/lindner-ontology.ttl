@@ -4,30 +4,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-# --- Classes ---
-
-lindnerOnt:Product
-    a owl:Class ;
-    rdfs:label "Product"@en ;
-    rdfs:comment "Company-specific product class."@en ;
-    rdfs:subClassOf con:Product .
-
-lindnerOnt:Component
-    a owl:Class ;
-    rdfs:label "Component"@en ;
-    rdfs:comment "A type of product specific to Lindner."@en ;
-    rdfs:subClassOf con:Component ;
-    rdfs:subClassOf lindnerOnt:Product .
-
 # --- Properties ---
-
-lindnerOnt:productID
-    a owl:DatatypeProperty ;
-    rdfs:label "Product ID"@en ;
-    rdfs:comment "A unique identifier for the product."@en ;
-    rdfs:domain lindnerOnt:Product ;
-    rdfs:range xsd:string ;
-    rdfs:subPropertyOf con:itemIdentifier .
 
 lindnerOnt:productFamily
     a owl:DatatypeProperty ;
@@ -41,11 +18,4 @@ lindnerOnt:productName
     rdfs:label "Product Name"@en ;
     rdfs:comment "The specific name of the product."@en ;
     rdfs:domain lindnerOnt:Product ;
-    rdfs:range rdfs:Literal .
-
-lindnerOnt:material
-    a owl:DatatypeProperty ;
-    rdfs:label "Material"@en ;
-    rdfs:comment "The primary material composition of the component."@en ;
-    rdfs:domain lindnerOnt:Component ;
     rdfs:range rdfs:Literal .
