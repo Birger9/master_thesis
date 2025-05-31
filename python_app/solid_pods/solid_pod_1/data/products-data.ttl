@@ -8,23 +8,23 @@
 lindnerData:nortec-cs-tile
     a lindnerOnt:Component ;
     rdfs:label "NORTEC Raised Floor Tile"@en ;
-    lindnerOnt:productID "NORTEC-CS-01" ;
+    con:productID "NORTEC-CS-01" ;
     lindnerOnt:productFamily "NORTEC" ;
     lindnerOnt:productName "NORTEC Raised Floor Tile" ;
-    lindnerOnt:material "Calcium Sulphate" .
+    con:material "Calcium Sulphate" .
 
 lindnerData:nortec-steel-pedestal
     a lindnerOnt:Component ;
     rdfs:label "NORTEC Steel Pedestal H200"@en ;
-    lindnerOnt:productID "NORTEC-PED-S" ;
+    con:productID "NORTEC-PED-S" ;
     lindnerOnt:productFamily "NORTEC" ;
     lindnerOnt:productName "NORTEC Steel Pedestal H200" ;
-    lindnerOnt:material "Galvanised Steel" .
+    con:material "Galvanised Steel" .
 
 lindnerData:lmd-ceiling-panel
     a lindnerOnt:Component ;
     rdfs:label "LMD Ceiling Panel"@en ;
-    lindnerOnt:productID "LMD-CP-01" ; 
+    con:productID "LMD-CP-01" ; 
     lindnerOnt:productFamily "LMD" ;
     lindnerOnt:productName "LMD Ceiling Panel" ;
-    lindnerOnt:material "Aluminum" .
+    con:material "Aluminum" .

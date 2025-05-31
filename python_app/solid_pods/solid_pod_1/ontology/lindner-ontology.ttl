@@ -10,12 +10,12 @@ lindnerOnt:productFamily
     a owl:DatatypeProperty ;
     rdfs:label "Product Family"@en ;
     rdfs:comment "The family the product belongs to (e.g., NORTEC, LMD)."@en ;
-    rdfs:domain lindnerOnt:Product ;
+    rdfs:domain con:Product ;
     rdfs:range rdfs:Literal .
 
 lindnerOnt:productName
     a owl:DatatypeProperty ;
     rdfs:label "Product Name"@en ;
     rdfs:comment "The specific name of the product."@en ;
-    rdfs:domain lindnerOnt:Product ;
+    rdfs:domain con:Product ;
     rdfs:range rdfs:Literal .
