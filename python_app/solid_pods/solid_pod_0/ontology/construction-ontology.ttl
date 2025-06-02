@@ -32,6 +32,16 @@ con:Assessment
     rdfs:label "Assessment"@en ;
     rdfs:comment "An evaluation or condition of an inventory item."@en .
 
+con:Stakeholder
+    a owl:Class ;
+    rdfs:label "Stakeholder"@en ;
+    rdfs:comment "An organization or party involved in the logistics process."@en .
+
+con:LogisticsCondition
+    a owl:Class ;
+    rdfs:label "Logistics Condition"@en ;
+    rdfs:comment "A specific condition or requirement governing the take-back of components. "@en .
+
 # --- Assessment Subclasses ---
 
 con:ReusableAssessment
@@ -117,4 +127,66 @@ con:material
     rdfs:domain con:Component ;
     rdfs:range rdfs:Literal .
 
+con:hasComponent
+    a owl:ObjectProperty ;
+    rdfs:label "Has Component"@en ;
+    rdfs:comment "Links a product to its constituent components."@en ;
+    rdfs:domain con:Product ;
+    rdfs:range con:Component . 
     
+con:pedestalGridSize
+    a owl:DatatypeProperty ;
+    rdfs:label "Pedestal Grid Size"@en ;
+    rdfs:comment "The standard grid dimension (width x length in mm) for a raised-floor component."@en ;
+    rdfs:domain con:Component ;
+    rdfs:range xsd:string . 
+
+con:isNonCombustible
+    a owl:DatatypeProperty ;
+    rdfs:label "Is Non-Combustible"@en ;
+    rdfs:comment "Boolean: true if the component’s primary material is classified as non-combustible."@en ;
+    rdfs:domain con:Component ;
+    rdfs:range xsd:boolean . 
+
+con:systemWeightMin
+    a owl:DatatypeProperty ;
+    rdfs:label "System Weight Minimum"@en ;
+    rdfs:comment "Minimum weight (kg/m^2) of a floor component."@en ;
+    rdfs:domain con:Component ;
+    rdfs:range xsd:decimal .
+
+con:systemWeightMax
+    a owl:DatatypeProperty ;
+    rdfs:label "System Weight Maximum"@en ;
+    rdfs:comment "Maximum weight (kg/m^2) of a floor component."@en ;
+    rdfs:domain con:Component ;
+    rdfs:range xsd:decimal .
+
+con:isFullyRecyclable
+    a owl:DatatypeProperty ;
+    rdfs:label "Is Fully Recyclable"@en ;
+    rdfs:comment "Boolean: true if the component can be recycled in full."@en ;
+    rdfs:domain con:Component ;
+    rdfs:range xsd:boolean .
+
+con:involvesStakeholder
+    a owl:ObjectProperty ;
+    rdfs:label "Involves Stakeholder"@en ;
+    rdfs:comment "Links a LogisticsCondition to one or more Stakeholder instances."@en ;
+    rdfs:domain con:LogisticsCondition ;
+    rdfs:range con:Stakeholder .
+
+con:hasLogisticsCondition
+    a owl:ObjectProperty ;
+    rdfs:label "Has Logistics Condition"@en ;
+    rdfs:comment "Links a Component to its associated LogisticsCondition."@en ;
+    rdfs:domain con:Component ;
+    rdfs:range con:LogisticsCondition .
+
+
+
+
+
+
+
+

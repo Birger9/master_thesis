@@ -6,25 +6,63 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
 lindnerData:nortec-cs-tile
-    a lindnerOnt:Component ;
+    a con:Component ;
     rdfs:label "NORTEC Raised Floor Tile"@en ;
     con:productID "NORTEC-CS-01" ;
     lindnerOnt:productFamily "NORTEC" ;
     lindnerOnt:productName "NORTEC Raised Floor Tile" ;
-    con:material "Calcium Sulphate" .
+    con:material "Calcium Sulphate" ;
+    con:pedestalGridSize "600x600 mm" ;
+    con:isNonCombustible true ;
+    con:systemWeightMin "32"^^xsd:decimal ;
+    con:systemWeightMax "62"^^xsd:decimal ;
+    con:hasLogisticsCondition lindnerData:TakeBackLogistics1 .   
 
 lindnerData:nortec-steel-pedestal
-    a lindnerOnt:Component ;
+    a con:Component ;
     rdfs:label "NORTEC Steel Pedestal H200"@en ;
     con:productID "NORTEC-PED-S" ;
     lindnerOnt:productFamily "NORTEC" ;
     lindnerOnt:productName "NORTEC Steel Pedestal H200" ;
-    con:material "Galvanised Steel" .
+    con:material "Galvanised Steel" ;
+    con:isFullyRecyclable true .
 
 lindnerData:lmd-ceiling-panel
-    a lindnerOnt:Component ;
+    a con:Component ;
     rdfs:label "LMD Ceiling Panel"@en ;
     con:productID "LMD-CP-01" ; 
     lindnerOnt:productFamily "LMD" ;
     lindnerOnt:productName "LMD Ceiling Panel" ;
     con:material "Aluminum" .
+
+lindnerData:nortec-floor-system
+    a con:Product ;
+    rdfs:label "NORTEC Raised Floor System"@en ;
+    con:hasComponent lindnerData:nortec-cs-tile , 
+                     lindnerData:nortec-steel-pedestal .
+
+# --- Stakeholder Instances ---
+
+lindnerData:Lindner_Group
+    a con:Stakeholder ;
+    rdfs:label "Lindner Group"@en .
+
+lindnerData:Concular
+    a con:Stakeholder ;
+    rdfs:label "Concular"@en .
+
+lindnerData:RangSells
+    a con:Stakeholder ;
+    rdfs:label "Rang-Sells"@en .
+
+# --- LogisticsCondition Instance ---
+
+lindnerData:TakeBackLogistics1
+    a con:LogisticsCondition ;
+    rdfs:label "Take-Back Logistics for NORTEC"@en ;
+    con:involvesStakeholder lindnerData:Lindner_Group ,
+                            lindnerData:Concular ,
+                            lindnerData:RangSells .
+
+
+
