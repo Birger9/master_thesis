@@ -39,7 +39,9 @@ concularData:items-batch-101
     con:quantity 500 ;
     con:currentAssessment concularData:assessments-assess-001 ;
     con:isAvailableForReuse true ;
-    con:storedAt concularData:locations-frankfurt-wh .
+    con:storedAt concularData:locations-frankfurt-wh ;
+    con:availableFromDate "2025-05-15"^^xsd:date ;
+    con:meetsFireSafetyCriteria true .                                                                 # Vi kan ändra här, detta är bara ett datum jag valt
 
 concularData:items-batch-102
     a concularOnt:InventoryItem ;
@@ -49,7 +51,8 @@ concularData:items-batch-102
     con:quantity 250 ;
     con:currentAssessment concularData:assessments-assess-002 ;
     con:isAvailableForReuse false ;
-    con:storedAt concularData:locations-frankfurt-wh .
+    con:storedAt concularData:locations-frankfurt-wh ;
+    con:meetsFireSafetyCriteria true .
 
 concularData:items-batch-201
     a concularOnt:InventoryItem ;
@@ -70,3 +73,28 @@ concularData:items-batch-301
     con:currentAssessment concularData:assessments-assess-003 ;
     con:isAvailableForReuse false ;
     con:storedAt concularData:locations-munich-depot .
+
+concularData:items-installed-mannheim-2022
+    a concularOnt:InventoryItem ;
+    rdfs:label "Batch INSTALLED-2022-NORTEC-TILES (Mannheim)"@en ;
+    con:itemIdentifier "INSTALLED-2022-NORTEC-TILES" ;
+    con:componentType lindnerData:nortec-cs-tile ;
+    con:quantity 500 ;
+    con:currentAssessment concularData:assessments-assess-001 ;
+    con:isAvailableForReuse false ;
+    con:installedAt buildingData:buildings-mannheim-office ;
+    con:installationDate "2022-12-31"^^xsd:date ;
+    con:dueReturnDate "2032-12-31"^^xsd:date ;
+    con:storedAt concularData:locations-frankfurt-wh ;
+    con:meetsFireSafetyCriteria true .
+
+concularData:ConcularTakeBackLogistics
+    a con:LogisticsCondition ;
+    rdfs:label "Concular Take-Back Condition for NORTEC Tiles"@en ;
+    con:involvesStakeholder concularData:Concular,
+                            <http://solid-pod-1/data/Lindner_Group> .
+
+concularData:Concular
+    a con:Stakeholder ;
+    rdfs:label "Concular"@en . 
+

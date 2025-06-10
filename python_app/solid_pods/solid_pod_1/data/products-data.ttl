@@ -45,15 +45,18 @@ lindnerData:nortec-floor-system
 
 lindnerData:Lindner_Group
     a con:Stakeholder ;
-    rdfs:label "Lindner Group"@en .
+    rdfs:label "Lindner Group"@en ;
+    con:paysSharedTruckCost false .          # Lindner benefits but does not pay
 
 lindnerData:Concular
     a con:Stakeholder ;
-    rdfs:label "Concular"@en .
+    rdfs:label "Concular"@en ;
+    con:paysSharedTruckCost true .           # Concular (transporter) bears the cost 
 
 lindnerData:RangSells
     a con:Stakeholder ;
-    rdfs:label "Rang-Sells"@en .
+    rdfs:label "Rang-Sells"@en ;
+    con:paysSharedTruckCost false .          # RangSells benefits but does not pay
 
 # --- LogisticsCondition Instance ---
 
@@ -62,7 +65,70 @@ lindnerData:TakeBackLogistics1
     rdfs:label "Take-Back Logistics for NORTEC"@en ;
     con:involvesStakeholder lindnerData:Lindner_Group ,
                             lindnerData:Concular ,
-                            lindnerData:RangSells .
+                            lindnerData:RangSells ;
+    con:requiresTransportJob logisticsData:jobs-job-987 ;
+    con:requiresTransportJob logisticsData:jobs-job-988 ;
+    con:requiresSharedVehicle true ;
+    con:transportConditionDescription
+        "Tiles must be loaded onto a shared electric truck; return job must be booked at least two weeks in advance. " .
+        
+lindnerData:locations-frankfurt-when
+    a con:StorageLocation ;
+    rdfs:label "Lindner Frankfurt Warehouse"@en ;
+    con:warehouseName "Frankfurt Warehouse" .
+
+lindnerData:locations-munich-depot
+    a con:StorageLocation ;
+    rdfs:label "Lindner Munich Depot"@en ;
+    con:warehouseName "Munich Depot"
+
+lindnerData:items-batch-101
+    a con:InventoryItem ;
+    rdfs:label "Batch 101: Reusable NORTEC Tiles (Lindner's view)"@en ;
+    con:itemIdentifier "BATCH-101-NORTEC-TILES" ;
+    con:componentType lindnerData:nortec-cs-tile ;
+    con:quantity 500 ;
+    con:currentAssessment <http://solid-pod-2/data/assessments-assess-001> ;
+    con:isAvailableForReuse true ;
+    con:storedAt lindnerData:locations-frankfurt-wh ;
+    con:meetsFireSafetyCriteria true .
+
+lindnerData:items-batch-102
+    a con:InventoryItem ;
+    rdfs:label "Batch 102: Recyclable NORTEC Tiles (Lindner's view)"@en ;
+    con:itemIdentifier "BATCH-102-NORTEC-TILES" ;
+    con:componentType lindnerData:nortec-cs-tile ;
+    con:quantity 250 ;
+    con:currentAssessment <http://solid-pod-2/data/assessments-assess-002> ;
+    con:isAvailableForReuse false ;
+    con:storedAt lindnerData:locations-frankfurt-wh ;
+    con:meetsFireSafetyCriteria true . 
+
+lindnerData:items-batch-201
+    a con:InventoryItem ;
+    rdfs:label "Batch 201: Damaged LMD Panels (Lindner's view)"@en ;
+    con:itemIdentifier "BATCH-201-LMD-PANELS" ;
+    con:componentType lindnerData:lmd-ceiling-panel ;
+    con:quantity 100 ;
+    con:currentAssessment <http://solid-pod-2/data/assessments-assess-003> ;
+    con:isAvailableForReuse false ;
+    con:storedAt lindnerData:locations-munich-depot .
+
+lindnerData:items-batch-301
+    a con:InventoryItem ;
+    rdfs:label "Batch 301: Damaged NORTEC Pedestals (Lindner's view)"@en ;
+    con:itemIdentifier "BATCH-301-NORTEC-PEDESTALS" ;
+    con:componentType lindnerData:nortec-steel-pedestal ;
+    con:quantity 800 ;
+    con:currentAssessment <http://solid-pod-2/data/assessments-assess-003> ;
+    con:isAvailableForReuse false ;
+    con:storedAt lindnerData:locations-munich-depot .
+
+
+
+
+
+
 
 
 

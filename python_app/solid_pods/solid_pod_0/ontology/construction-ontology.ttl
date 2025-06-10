@@ -99,6 +99,13 @@ con:isAvailableForReuse
     rdfs:domain con:InventoryItem ;
     rdfs:range xsd:boolean .
 
+con:availableFromDate
+     a owl:DatatypeProperty ;
+    rdfs:label "Available From Date"@en ;
+    rdfs:comment "Date when this inventory item became available for reuse."@en ;
+    rdfs:domain con:InventoryItem ;
+    rdfs:range xsd:date .
+
 con:storedAt
     a owl:ObjectProperty ;
     rdfs:label "Stored At"@en ;
@@ -182,6 +189,63 @@ con:hasLogisticsCondition
     rdfs:comment "Links a Component to its associated LogisticsCondition."@en ;
     rdfs:domain con:Component ;
     rdfs:range con:LogisticsCondition .
+
+con:installationDate
+    a owl:DatatypeProperty ;
+    rdfs:label "Installation Date"@en ;
+    rdfs:comment "The date when this inventory item was installed in a building."@en ;
+    rdfs:domain con:InventoryItem ;
+    rdfs:range xsd:date .
+
+con:dueReturnDate
+    a owl:DatatypeProperty ;
+    rdfs:label "Due Return Date"@en ;
+    rdfs:comment "The date by which this inventory item should be returned."@en ;
+    rdfs:domain con:InventoryItem ;
+    rdfs:range xsd:date .
+
+con:installedAt
+    a owl:ObjectProperty ;
+    rdfs:label "Installed At"@en ;
+    rdfs:comment "Links an InventoryItem to the Building where it was installed."@en ;
+    rdfs:domain con:InventoryItem ;
+    rdfs:range <http://solid-pod-4/ontology#Building> .
+
+con:requiresTransportJob
+    a owl:ObjectProperty ;
+    rdfs:label "Requires Transport Job"@en ;
+    rdfs:comment "Links a LogisticsCondition to one or more TransportJob instances that must be scheduled."@en ;
+    rdfs:domain con:LogisticsCondition ;
+    rdfs:range <http://solid-pod-5/ontology#TransportJob> .
+
+con:requiresSharedVehicle
+    a owl:DatatypeProperty ;
+    rdfs:label "Requires Shared Vehicle"@en ;
+    rdfs:comment "Boolean: true if the take-back must use a shared truck (rather than a dedicated one)."@en ;
+    rdfs:domain con:LogisticsCondition ;
+    rdfs:range xsd:boolean .
+
+con:transportConditionDescription
+    a owl:DatatypeProperty ;
+    rdfs:label "Transport Condition Description"@en ;
+    rdfs:comment "A short text explaining any special tranport requirements (e.g., 'return must be scheduled at least 2 weeks in advance')."@en ;
+    rdfs:domain con:LogisticsCondition ;
+    rdfs:range rdfs:Literal .
+
+con:paysSharedTruckCost
+    a owl:DatatypeProperty ;
+    rdfs:label "Pays Shared-Truck Cost"@en ;
+    rdfs:comment "Boolean: true if this stakeholder bears the cost of the shared-truck scheme. "@en ;
+    rdfs:domain con:Stakeholder ;
+    rdfs:range xsd:boolean . 
+
+con:meetsFireSafetyCriteria
+    a owl:DatatypeProperty ;
+    rdfs:label "Meets Fire-Safety Criteria"@en ;
+    rdfs:comment "Boolean: true if this inventory item meets the fire-safety reuse requirements (e.g. non-combustible)."@en ;
+    rdfs:domain con:InventoryItem ;
+    rdfs:range xsd:boolean .
+
 
 
 
