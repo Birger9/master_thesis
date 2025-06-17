@@ -9,9 +9,9 @@ def load_azure_client():
     endpoint = os.getenv("AZURE_ENDPOINT")
     key = os.getenv("AZURE_API_KEY")
     api_version = os.getenv("AZURE_API_VERSION")
-    deployment  = os.getenv("AZURE_DEPLOYMENT_NAME")
+    model  = os.getenv("AZURE_DEPLOYMENT_NAME")
 
-    if not all([endpoint, key, deployment]):
+    if not all([endpoint, key, model]):
         raise EnvironmentError(
             "Missing Azure OpenAI config; set AZURE_ENDPOINT, AZURE_API_KEY, AZURE_DEPLOYMENT_NAME in .env"
         )
@@ -21,7 +21,7 @@ def load_azure_client():
         api_key=key,
         api_version=api_version
     )
-    return client, deployment
+    return client, model
 
 def read_ttl_files(directory_path: pathlib.Path) -> Dict[str,str]:
     """Reads all .ttl files in a directory and returns their content."""

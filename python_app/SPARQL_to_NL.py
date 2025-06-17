@@ -1,6 +1,6 @@
 from typing import List, Dict
 from llm_utils import load_azure_client, read_ttl_files, call_llm
-from config import BASE_POD_DIR, NUM_PODS, GENERATED_QUERIES_FILE, GENERATED_NL_FILE
+from config import BASE_POD_DIR, NUM_PODS, GENERATED_NL_FILE
 from meta_data import POD_METADATA
 
 def build_sparql_to_nl_prompt(sparql_query: str, pod_details: List[Dict]) -> str:
