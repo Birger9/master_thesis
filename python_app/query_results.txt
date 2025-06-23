@@ -1,31 +1,54 @@
 --- Query #1 ---
 PREFIX con: <http://solid-pod-0/ontology#>
-PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
-PREFIX concularOnt: <http://solid-pod-2/ontology#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT DISTINCT ?component ?componentLabel
+SELECT DISTINCT ?material
 WHERE {
   SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-    ?component a lindnerOnt:Component ;
-               lindnerOnt:productFamily "NORTEC" ;
-               rdfs:label ?componentLabel .
-  }
-  SERVICE <http://localhost:3030/solid-pod-2/sparql> {
-    ?inventoryItem a concularOnt:InventoryItem ;
-                   con:componentType ?component ;
-                   con:isAvailableForReuse true .
+    ?product a con:Product ;
+             rdfs:label "NORTEC Raised Floor System"@en ;
+             con:hasComponent ?component .
+    ?component con:material ?material .
   }
 }
 --- Results ---
 { "head": {
-    "vars": [ "component" , "componentLabel" ]
+    "vars": [ "material" ]
   } ,
   "results": {
     "bindings": [
       { 
-        "component": { "type": "uri" , "value": "http://solid-pod-1/data/nortec-cs-tile" } ,
-        "componentLabel": { "type": "literal" , "xml:lang": "en" , "value": "NORTEC Raised Floor Tile" }
+        "material": { "type": "literal" , "value": "Calcium Sulphate" }
+      } ,
+      { 
+        "material": { "type": "literal" , "value": "Galvanised Steel" }
+      }
+    ]
+  }
+}
+
+
+--- Query #2 ---
+PREFIX con: <http://solid-pod-0/ontology#>
+PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?pedestalGridSize WHERE {
+  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
+    ?component a con:Component ;
+               lindnerOnt:productFamily "NORTEC" ;
+               con:pedestalGridSize ?pedestalGridSize .
+  }
+}
+--- Results ---
+{ "head": {
+    "vars": [ "pedestalGridSize" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "pedestalGridSize": { "type": "literal" , "value": "600x600 mm" }
       }
     ]
   }

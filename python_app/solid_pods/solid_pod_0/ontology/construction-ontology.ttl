@@ -8,14 +8,12 @@
 con:Product
     a owl:Class ;
     rdfs:label "Product"@en ;
-    rdfs:comment "General concept of a product used in construction."@en ;
-    rdfs:subClassOf product:Product .
+    rdfs:comment "General concept of a product used in construction."@en .
 
 con:Component
     a owl:Class ;
     rdfs:label "Component"@en ;
-    rdfs:comment "A component or part of a product."@en ;
-    rdfs:subClassOf con:Product .
+    rdfs:comment "A component or part of a product."@en .
 
 con:InventoryItem
     a owl:Class ;

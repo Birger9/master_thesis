@@ -2,6 +2,7 @@
 @prefix con: <http://solid-pod-0/ontology#> .
 @prefix concularData: <http://solid-pod-2/data/> .
 @prefix lindnerData: <http://solid-pod-1/data/> .
+@prefix buildingData: <http://solid-pod-4/data/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -41,7 +42,7 @@ concularData:items-batch-101
     con:isAvailableForReuse true ;
     con:storedAt concularData:locations-frankfurt-wh ;
     con:availableFromDate "2025-05-15"^^xsd:date ;
-    con:meetsFireSafetyCriteria true .                                                                 # Vi kan ändra här, detta är bara ett datum jag valt
+    con:meetsFireSafetyCriteria true .
 
 concularData:items-batch-102
     a concularOnt:InventoryItem ;

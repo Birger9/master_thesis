@@ -1,6 +1,7 @@
 @prefix lindnerOnt: <http://solid-pod-1/ontology#> .
 @prefix con: <http://solid-pod-0/ontology#> .
 @prefix lindnerData: <http://solid-pod-1/data/> .
+@prefix logisticsData: <http://solid-pod-5/data/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -46,17 +47,17 @@ lindnerData:nortec-floor-system
 lindnerData:Lindner_Group
     a con:Stakeholder ;
     rdfs:label "Lindner Group"@en ;
-    con:paysSharedTruckCost false .          # Lindner benefits but does not pay
+    con:paysSharedTruckCost false . # Lindner benefits but does not pay
 
 lindnerData:Concular
     a con:Stakeholder ;
     rdfs:label "Concular"@en ;
-    con:paysSharedTruckCost true .           # Concular (transporter) bears the cost 
+    con:paysSharedTruckCost true . # Concular (transporter) bears the cost 
 
 lindnerData:RangSells
     a con:Stakeholder ;
     rdfs:label "Rang-Sells"@en ;
-    con:paysSharedTruckCost false .          # RangSells benefits but does not pay
+    con:paysSharedTruckCost false . # RangSells benefits but does not pay
 
 # --- LogisticsCondition Instance ---
 
@@ -80,7 +81,7 @@ lindnerData:locations-frankfurt-when
 lindnerData:locations-munich-depot
     a con:StorageLocation ;
     rdfs:label "Lindner Munich Depot"@en ;
-    con:warehouseName "Munich Depot"
+    con:warehouseName "Munich Depot" .
 
 lindnerData:items-batch-101
     a con:InventoryItem ;
