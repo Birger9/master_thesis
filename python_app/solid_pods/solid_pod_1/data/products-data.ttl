@@ -26,6 +26,8 @@ lindnerData:nortec-steel-pedestal
     lindnerOnt:productFamily "NORTEC" ;
     lindnerOnt:productName "NORTEC Steel Pedestal H200" ;
     con:material "Galvanised Steel" ;
+    con:systemWeightMin "10"^^xsd:decimal ;
+    con:systemWeightMax "20"^^xsd:decimal ;
     con:isFullyRecyclable true .
 
 lindnerData:lmd-ceiling-panel

@@ -23,10 +23,10 @@ with gr.Blocks() as demo:
         history.append({"role": "user", "content": f"Generated Query\n\n{sparql}\n\n"})
 
         # Translate the SPARQL query to a natural language translation.
-        nl_explanation = translate_sparql_to_nl(sparql)
+        #nl_explanation = translate_sparql_to_nl(sparql)
 
         # Show the natural language translation in the Chat UI.
-        history.append({"role": "assistant", "content": f"Natural Language Translation\n\n{nl_explanation}"})
+        #history.append({"role": "assistant", "content": f"Natural Language Translation\n\n{nl_explanation}"})
         return "", history
 
     msg.submit(pipeline_chat, [msg, chatbot], [msg, chatbot])

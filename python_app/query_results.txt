@@ -1,435 +1,175 @@
---- Query #1 ---
-PREFIX con: <http://solid-pod-0/ontology#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+--- Optional ---
 
-SELECT DISTINCT ?material
-WHERE {
-  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-    ?product a con:Product ;
-             rdfs:label "NORTEC Raised Floor System"@en ;
-             con:hasComponent ?component .
-    ?component con:material ?material .
-  }
-}
---- Results ---
+--- Query #1 Results ---
 { "head": {
-    "vars": [ "material" ]
+    "vars": [ "itemIdentifier" , "availableFromDate" ]
   } ,
   "results": {
     "bindings": [
       { 
-        "material": { "type": "literal" , "value": "Calcium Sulphate" }
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-101-NORTEC-TILES" } ,
+        "availableFromDate": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2025-05-15" }
+      }
+    ]
+  }
+}
+
+--- Query #2 Results---
+{ "head": {
+    "vars": [ "componentLabel" , "transportConditionDescription" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "componentLabel": { "type": "literal" , "xml:lang": "en" , "value": "NORTEC Raised Floor Tile" } ,
+        "transportConditionDescription": { "type": "literal" , "value": "Tiles must be loaded onto a shared electric truck; return job must be booked at least two weeks in advance. " }
+      }
+    ]
+  }
+}
+
+--- Query #3 Results ---
+{ "head": {
+    "vars": [ "itemIdentifier" , "warehouseName" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-101-NORTEC-TILES" } ,
+        "warehouseName": { "type": "literal" , "value": "Frankfurt Warehouse" }
       } ,
       { 
-        "material": { "type": "literal" , "value": "Galvanised Steel" }
-      }
-    ]
-  }
-}
-
---- Query #2 ---
-PREFIX con: <http://solid-pod-0/ontology#>
-PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-SELECT DISTINCT ?pedestalGridSize WHERE {
-  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-    ?component a con:Component ;
-               lindnerOnt:productFamily "NORTEC" ;
-               con:pedestalGridSize ?pedestalGridSize .
-  }
-}
---- Results ---
-{ "head": {
-    "vars": [ "pedestalGridSize" ]
-  } ,
-  "results": {
-    "bindings": [
-      { 
-        "pedestalGridSize": { "type": "literal" , "value": "600x600 mm" }
-      }
-    ]
-  }
-}
-
---- Query #3 ---
-PREFIX con: <http://solid-pod-0/ontology#>
-PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-SELECT ?component ?productName ?isNonCombustible
-WHERE {
-  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-    ?component a con:Component ;
-               con:material ?material ;
-               con:isNonCombustible ?isNonCombustible ;
-               lindnerOnt:productFamily ?family ;
-               lindnerOnt:productName ?productName .
-               
-    FILTER(regex(str(?material), "Calcium Sulphate", "i"))
-    FILTER(regex(str(?family), "^NORTEC$", "i"))
-  }
-}
---- Results ---
-{ "head": {
-    "vars": [ "component" , "productName" , "isNonCombustible" ]
-  } ,
-  "results": {
-    "bindings": [
-      { 
-        "component": { "type": "uri" , "value": "http://solid-pod-1/data/nortec-cs-tile" } ,
-        "productName": { "type": "literal" , "value": "NORTEC Raised Floor Tile" } ,
-        "isNonCombustible": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "value": "true" }
-      }
-    ]
-  }
-}
-
---- Query #4 ---
-PREFIX con:  <http://solid-pod-0/ontology#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-SELECT DISTINCT ?systemWeightMin ?systemWeightMax
-WHERE {
-  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-    ?floorSystem a con:Product ;
-                 rdfs:label "NORTEC Raised Floor System"@en ;
-                 con:hasComponent ?component .
-    ?component   con:systemWeightMin ?systemWeightMin ;
-                 con:systemWeightMax ?systemWeightMax .
-  }
-}
---- Results ---
-{ "head": {
-    "vars": [ "systemWeightMin" , "systemWeightMax" ]
-  } ,
-  "results": {
-    "bindings": [
-      { 
-        "systemWeightMin": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#decimal" , "value": "32.0" } ,
-        "systemWeightMax": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#decimal" , "value": "62.0" }
-      }
-    ]
-  }
-}
-
---- Query #5 ---
-PREFIX con: <http://solid-pod-0/ontology#>
-PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-SELECT ?component ?label ?isFullyRecyclable
-WHERE {
-  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-    ?component a con:Component ;
-               rdfs:label ?label ;
-               con:isFullyRecyclable ?isFullyRecyclable ;
-               lindnerOnt:productFamily "NORTEC" ;
-               lindnerOnt:productName ?prodName .
-    FILTER (CONTAINS(LCASE(?prodName), "steel pedestal"))
-  }
-}
---- Results ---
-{ "head": {
-    "vars": [ "component" , "label" , "isFullyRecyclable" ]
-  } ,
-  "results": {
-    "bindings": [
-      { 
-        "component": { "type": "uri" , "value": "http://solid-pod-1/data/nortec-steel-pedestal" } ,
-        "label": { "type": "literal" , "xml:lang": "en" , "value": "NORTEC Steel Pedestal H200" } ,
-        "isFullyRecyclable": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "value": "true" }
-      }
-    ]
-  }
-}
-
---- Query #6 ---
-PREFIX con: <http://solid-pod-0/ontology#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-SELECT DISTINCT ?stakeholder ?stakeholderName
-WHERE {
-  {
-    SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-      # Find the logistics condition for NORTEC tiles in Pod 1
-      ?component a con:Component ;
-                 rdfs:label ?componentLabel ;
-                 con:hasLogisticsCondition ?logistics .
-      FILTER (CONTAINS(LCASE(?componentLabel), "nortec"))
-      ?logistics a con:LogisticsCondition ;
-                 rdfs:label ?logisticsLabel ;
-                 con:involvesStakeholder ?stakeholder .
-      FILTER (CONTAINS(LCASE(?logisticsLabel), "take-back"))
-      ?stakeholder rdfs:label ?stakeholderName .
-    }
-  }
-  UNION
-  {
-    SERVICE <http://localhost:3030/solid-pod-2/sparql> {
-      # Also check in Pod 2 for a NORTEC take-back logistics condition
-      ?component a con:Component ;
-                 rdfs:label ?componentLabel ;
-                 con:hasLogisticsCondition ?logistics .
-      FILTER (CONTAINS(LCASE(?componentLabel), "nortec"))
-      ?logistics a con:LogisticsCondition ;
-                 rdfs:label ?logisticsLabel ;
-                 con:involvesStakeholder ?stakeholder .
-      FILTER (CONTAINS(LCASE(?logisticsLabel), "take-back"))
-      ?stakeholder rdfs:label ?stakeholderName .
-    }
-  }
-}
---- Results ---
-{ "head": {
-    "vars": [ "stakeholder" , "stakeholderName" ]
-  } ,
-  "results": {
-    "bindings": [
-      { 
-        "stakeholder": { "type": "uri" , "value": "http://solid-pod-1/data/Lindner_Group" } ,
-        "stakeholderName": { "type": "literal" , "xml:lang": "en" , "value": "Lindner Group" }
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-102-NORTEC-TILES" } ,
+        "warehouseName": { "type": "literal" , "value": "Frankfurt Warehouse" }
       } ,
       { 
-        "stakeholder": { "type": "uri" , "value": "http://solid-pod-1/data/Concular" } ,
-        "stakeholderName": { "type": "literal" , "xml:lang": "en" , "value": "Concular" }
-      } ,
-      { 
-        "stakeholder": { "type": "uri" , "value": "http://solid-pod-1/data/RangSells" } ,
-        "stakeholderName": { "type": "literal" , "xml:lang": "en" , "value": "Rang-Sells" }
+        "itemIdentifier": { "type": "literal" , "value": "INSTALLED-2022-NORTEC-TILES" } ,
+        "warehouseName": { "type": "literal" , "value": "Frankfurt Warehouse" }
       }
     ]
   }
 }
 
---- Query #7 ---
-PREFIX con: <http://solid-pod-0/ontology#>
-PREFIX lindnerOnt:<http://solid-pod-1/ontology#>
-PREFIX concularOnt:<http://solid-pod-2/ontology#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT DISTINCT ?warehouseName ?availableDate
-WHERE {
-  SERVICE <http://localhost:3030/solid-pod-2/sparql> {
-    ?item a concularOnt:InventoryItem ;
-           con:isAvailableForReuse true ;
-           con:availableFromDate ?availableDate ;
-           con:storedAt ?location ;
-           con:componentType ?comp .
-    ?location con:warehouseName ?warehouseName .
-  }
-  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-    ?comp lindnerOnt:productFamily "NORTEC" .
+--- BIND ---
+
+--- Query #1 Results ---
+
+{ "head": {
+    "vars": [ "itemIdentifier" , "quantity" , "status" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-101-NORTEC-TILES" } ,
+        "quantity": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "500" } ,
+        "status": { "type": "literal" , "value": "Low" }
+      } ,
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-102-NORTEC-TILES" } ,
+        "quantity": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "250" } ,
+        "status": { "type": "literal" , "value": "Low" }
+      } ,
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-201-LMD-PANELS" } ,
+        "quantity": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "100" } ,
+        "status": { "type": "literal" , "value": "Low" }
+      } ,
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-301-NORTEC-PEDESTALS" } ,
+        "quantity": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "800" } ,
+        "status": { "type": "literal" , "value": "High" }
+      } ,
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "INSTALLED-2022-NORTEC-TILES" } ,
+        "quantity": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "500" } ,
+        "status": { "type": "literal" , "value": "Low" }
+      }
+    ]
   }
 }
---- Results ---
+
+--- Query #2 Results ---
+{
+  "head": {
+    "vars": [ "productID", "avgWeight" ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "productID": {
+          "type": "literal",
+          "value": "NORTEC-PED-S"
+        },
+        "avgWeight": {
+          "type": "literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "value": "15"
+        }
+      }
+    ]
+  }
+}
+
+--- Query #3 Results ---
 { "head": {
-    "vars": [ "warehouseName" , "availableDate" ]
+    "vars": [ "jobID" , "route" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "jobID": { "type": "literal" , "value": "TJ-2032-08-987" } ,
+        "route": { "type": "literal" , "value": "Mannheim->Frankfurt" }
+      } ,
+      { 
+        "jobID": { "type": "literal" , "value": "TJ-2032-08-988" } ,
+        "route": { "type": "literal" , "value": "Frankfurt->Stuttgart" }
+      }
+    ]
+  }
+}
+
+--- HAVING ---
+
+--- Query #1 Results--
+{ "head": {
+    "vars": [ "vehicleID" , "jobCount" ]
+  } ,
+  "results": {
+    "bindings": []
+  }
+}
+
+--- Query #2 Results ---
+{ "head": {
+    "vars": [ "productLabel" , "componentCount" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "productLabel": { "type": "literal" , "xml:lang": "en" , "value": "NORTEC Raised Floor System" } ,
+        "componentCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "2" }
+      }
+    ]
+  }
+}
+
+--- Query #3 Results ---
+{ "head": {
+    "vars": [ "warehouseName" , "totalQty" ]
   } ,
   "results": {
     "bindings": [
       { 
         "warehouseName": { "type": "literal" , "value": "Frankfurt Warehouse" } ,
-        "availableDate": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2025-05-15" }
-      }
-    ]
-  }
-}
-
---- Query #8 ---
-PREFIX con: <http://solid-pod-0/ontology#>
-PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
-PREFIX buildingsOnt: <http://solid-pod-4/ontology#>
-PREFIX concularOnt: <http://solid-pod-2/ontology#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-SELECT ?item ?itemIdentifier ?installationDate ?dueReturnDate
-WHERE {
-  SERVICE <http://localhost:3030/solid-pod-2/sparql> {
-    ?item a concularOnt:InventoryItem ;
-          con:itemIdentifier     ?itemIdentifier ;
-          con:componentType      ?component ;
-          con:installationDate   ?installationDate ;
-          con:dueReturnDate       ?dueReturnDate ;
-          con:installedAt        ?building .
-    FILTER( YEAR(xsd:date(?installationDate)) = 2022
-         && YEAR(xsd:date(?dueReturnDate)) = 2032 )
-  }
-  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-    ?component lindnerOnt:productFamily "NORTEC" .
-  }
-  SERVICE <http://localhost:3030/solid-pod-4/sparql> {
-    ?building buildingsOnt:city "Mannheim" .
-  }
-}
---- Results ---
-{ "head": {
-    "vars": [ "item" , "itemIdentifier" , "installationDate" , "dueReturnDate" ]
-  } ,
-  "results": {
-    "bindings": [
-      { 
-        "item": { "type": "uri" , "value": "http://solid-pod-2/data/items-installed-mannheim-2022" } ,
-        "itemIdentifier": { "type": "literal" , "value": "INSTALLED-2022-NORTEC-TILES" } ,
-        "installationDate": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2022-12-31" } ,
-        "dueReturnDate": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2032-12-31" }
-      }
-    ]
-  }
-}
-
---- Query #9 ---
-PREFIX con: <http://solid-pod-0/ontology#>
-PREFIX concularOnt: <http://solid-pod-2/ontology#>
-PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-SELECT ?transportConditionDescription ?requiresSharedVehicle
-WHERE {
-  SERVICE <http://localhost:3030/solid-pod-2/sparql> {
-    ?item a concularOnt:InventoryItem .
-    ?item con:componentType ?tileComponent .
-    ?item con:storedAt ?sourceLocation .
-    ?sourceLocation con:warehouseName ?srcName .
-    FILTER(?srcName = "Frankfurt Warehouse")
-  }
-  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-    ?tileComponent a con:Component .
-    ?tileComponent con:productID "NORTEC-CS-01" .
-    ?tileComponent con:hasLogisticsCondition ?logisticsCondition .
-    ?logisticsCondition con:requiresSharedVehicle ?requiresSharedVehicle ;
-                        con:transportConditionDescription ?transportConditionDescription .
-  }
-}
---- Results ---
-{ "head": {
-    "vars": [ "transportConditionDescription" , "requiresSharedVehicle" ]
-  } ,
-  "results": {
-    "bindings": [
-      { 
-        "transportConditionDescription": { "type": "literal" , "value": "Tiles must be loaded onto a shared electric truck; return job must be booked at least two weeks in advance. " } ,
-        "requiresSharedVehicle": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "value": "true" }
+        "totalQty": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1250" }
       } ,
       { 
-        "transportConditionDescription": { "type": "literal" , "value": "Tiles must be loaded onto a shared electric truck; return job must be booked at least two weeks in advance. " } ,
-        "requiresSharedVehicle": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "value": "true" }
-      } ,
-      { 
-        "transportConditionDescription": { "type": "literal" , "value": "Tiles must be loaded onto a shared electric truck; return job must be booked at least two weeks in advance. " } ,
-        "requiresSharedVehicle": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "value": "true" }
+        "warehouseName": { "type": "literal" , "value": "Munich Depot" } ,
+        "totalQty": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "900" }
       }
     ]
   }
 }
 
---- Query #10 ---
-PREFIX con: <http://solid-pod-0/ontology#>
-PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-SELECT (COUNT(DISTINCT ?logCond) AS ?distinctLogisticsConditionCount)
-WHERE {
-  {
-    SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-      ?comp a con:Component ;
-            lindnerOnt:productFamily "NORTEC" ;
-            con:hasLogisticsCondition ?logCond .
-      ?logCond rdfs:label ?label .
-      # Even if the label does not mention "tile" explicitly,
-      # we know this component is used for NORTEC tile returns.
-      FILTER(CONTAINS(LCASE(?label), "nortec"))
-    }
-  }
-  UNION
-  {
-    SERVICE <http://localhost:3030/solid-pod-2/sparql> {
-      ?logCond a con:LogisticsCondition ;
-               rdfs:label ?label .
-      FILTER(CONTAINS(LCASE(?label), "nortec"))
-    }
-  }
-}
---- Results ---
-{ "head": {
-    "vars": [ "distinctLogisticsConditionCount" ]
-  } ,
-  "results": {
-    "bindings": [
-      { 
-        "distinctLogisticsConditionCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "2" }
-      }
-    ]
-  }
-}
-
---- Query #11 ---
-PREFIX con: <http://solid-pod-0/ontology#>
-PREFIX lindnerOnt: <http://solid-pod-1/ontology#>
-PREFIX concularOnt: <http://solid-pod-2/ontology#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-SELECT DISTINCT ?batchID ?lindnerWarehouse ?concularWarehouse
-WHERE {
-  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-    ?lindnerBatch a con:InventoryItem ;
-                   con:itemIdentifier ?batchID ;
-                   con:componentType ?comp ;
-                   con:storedAt ?lStorage .
-    ?comp lindnerOnt:productFamily "NORTEC" .
-    ?lStorage con:warehouseName ?lindnerWarehouse .
-  }
-  SERVICE <http://localhost:3030/solid-pod-2/sparql> {
-    ?concularBatch a concularOnt:InventoryItem ;
-                    con:itemIdentifier ?batchID ;
-                    con:storedAt ?cStorage .
-    ?cStorage con:warehouseName ?concularWarehouse .
-  }
-  FILTER(?lindnerWarehouse != ?concularWarehouse)
-}
---- Results ---
-{ "head": {
-    "vars": [ "batchID" , "lindnerWarehouse" , "concularWarehouse" ]
-  } ,
-  "results": {
-    "bindings": [
-      
-    ]
-  }
-}
-
---- Query #12 ---
-PREFIX con: <http://solid-pod-0/ontology#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-SELECT DISTINCT ?stakeholder ?stakeholderName
-WHERE {
-  SERVICE <http://localhost:3030/solid-pod-1/sparql> {
-    ?logCond a con:LogisticsCondition ;
-             con:requiresSharedVehicle true ;
-             con:involvesStakeholder ?stakeholder .
-    ?stakeholder a con:Stakeholder ;
-                 con:paysSharedTruckCost false ;
-                 rdfs:label ?stakeholderName .
-  }
-}
---- Results ---
-{ "head": {
-    "vars": [ "stakeholder" , "stakeholderName" ]
-  } ,
-  "results": {
-    "bindings": [
-      { 
-        "stakeholder": { "type": "uri" , "value": "http://solid-pod-1/data/Lindner_Group" } ,
-        "stakeholderName": { "type": "literal" , "xml:lang": "en" , "value": "Lindner Group" }
-      } ,
-      { 
-        "stakeholder": { "type": "uri" , "value": "http://solid-pod-1/data/RangSells" } ,
-        "stakeholderName": { "type": "literal" , "xml:lang": "en" , "value": "Rang-Sells" }
-      }
-    ]
-  }
-}
-
+--- FILTER ---

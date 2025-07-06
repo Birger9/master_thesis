@@ -1,0 +1,14 @@
+PREFIX concularOnt: <http://solid-pod-2/ontology#>
+PREFIX con:          <http://solid-pod-0/ontology#>
+
+SELECT ?warehouseName (SUM(?qty) AS ?totalQty)
+WHERE {
+  SERVICE <http://localhost:3030/solid-pod-2/sparql> {
+    ?item a concularOnt:InventoryItem ;
+          con:quantity ?qty ;
+          con:storedAt ?loc .
+    ?loc con:warehouseName ?warehouseName .
+  }
+}
+GROUP BY ?warehouseName
+HAVING (SUM(?qty) > 600)
