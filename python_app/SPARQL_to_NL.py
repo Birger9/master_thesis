@@ -5,7 +5,9 @@ from meta_data import POD_METADATA
 
 def build_sparql_to_nl_prompt(sparql_query: str, pod_details: List[Dict]) -> str:
     prompt_head = (
-        "You will translate a Federated SPARQL query into a natural language description.\n"
+        "You will translate a Federated SPARQL query into a natural language description in English.\n" \
+        "Describe the federated SPARQL query in a comprehensible, concise and easy way to understand for a non-technical reader.\n"
+        "The description should be written as a flowing text.\n"
         "Use the following ontologies as context.\n"
     )
     background_intro = "\nOntologies:\n"
@@ -16,7 +18,7 @@ def build_sparql_to_nl_prompt(sparql_query: str, pod_details: List[Dict]) -> str
             f"{p['ontology_content']}\n\n"
         )
     prompt_tail = "\nSPARQL Query:\n\n" + sparql_query + "\n\n"
-    prompt_tail += "Output just the plain English description of what this query does."
+    prompt_tail += "Output only the natural language description."
     return prompt_head + background_intro + summary + prompt_tail
 
 def translate_sparql_to_nl(sparql: str):
