@@ -17,7 +17,7 @@ def build_nl_to_sparql_prompt(nl_question: str, pod_details: List[Dict]) -> str:
     for i, pod in enumerate(pod_details):
         pod_summaries += (
             f"Pod {i} - {pod['name']}: {pod['description']}\n"
-            f"  Ontology URL: {pod['ontology_url']}\n"
+            f"Ontology URL: {pod['ontology_url']}\n"
         )
         pod_urls += f"Pod {i} - {pod['pod_url']}\n"
         pod_ontology_details += (
