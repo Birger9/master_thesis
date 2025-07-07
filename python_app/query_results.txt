@@ -173,3 +173,243 @@
 }
 
 --- FILTER ---
+
+--- Query #1 Results ---
+{ "head": {
+    "vars": [ "itemIdentifier" , "quantity" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-101-NORTEC-TILES" } ,
+        "quantity": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "500" }
+      } ,
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-301-NORTEC-PEDESTALS" } ,
+        "quantity": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "800" }
+      } ,
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "INSTALLED-2022-NORTEC-TILES" } ,
+        "quantity": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "500" }
+      }
+    ]
+  }
+}
+
+--- Query #2 Results ---
+{ "head": {
+    "vars": [ "componentLabel" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "componentLabel": { "type": "literal" , "xml:lang": "en" , "value": "NORTEC Steel Pedestal H200" }
+      }
+    ]
+  }
+}
+
+--- Query #3 Results ---
+{ "head": {
+    "vars": [ "buildingName" , "address" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "buildingName": { "type": "literal" , "value": "Frankfurt HQ Building" } ,
+        "address": { "type": "literal" , "value": "Platz der Einheit 1, 60327 Frankfurt am Main" }
+      }
+    ]
+  }
+}
+
+
+--- COMPLEX FILTERs ---
+
+--- Query #1 Results ---
+{ "head": {
+    "vars": [ "itemIdentifier" , "quantity" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-101-NORTEC-TILES" } ,
+        "quantity": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "500" }
+      }
+    ]
+  }
+}
+
+--- Query #2 Results ---
+{ "head": {
+    "vars": [ "label" , "material" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "label": { "type": "literal" , "xml:lang": "en" , "value": "NORTEC Raised Floor Tile" } ,
+        "material": { "type": "literal" , "value": "Calcium Sulphate" }
+      }
+    ]
+  }
+}
+
+
+--- Query #3 Results ---
+{ "head": {
+    "vars": [ "jobID" , "scheduledDate" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "jobID": { "type": "literal" , "value": "TJ-2032-08-987" } ,
+        "scheduledDate": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2032-08-16" }
+      } ,
+      { 
+        "jobID": { "type": "literal" , "value": "TJ-2032-08-988" } ,
+        "scheduledDate": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2032-08-18" }
+      }
+    ]
+  }
+}
+
+--- UNION ---
+
+--- Query #1 Results ---
+{ "head": {
+    "vars": [ "label" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "label": { "type": "literal" , "xml:lang": "en" , "value": "NORTEC Raised Floor Tile" }
+      } ,
+      { 
+        "label": { "type": "literal" , "xml:lang": "en" , "value": "NORTEC Steel Pedestal H200" }
+      }
+    ]
+  }
+}
+
+--- Query #2 Results ---
+{ "head": {
+    "vars": [ "productLabel" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "productLabel": { "type": "literal" , "xml:lang": "en" , "value": "NORTEC Raised Floor System" }
+      }
+    ]
+  }
+}
+
+--- Query #3 Results ---
+{ "head": {
+    "vars": [ "itemIdentifier" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-101-NORTEC-TILES" }
+      } ,
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-102-NORTEC-TILES" }
+      }
+    ]
+  }
+}
+
+--- FILTER NOT EXISTS ---
+
+--- Query #1 Results ---
+{ "head": {
+    "vars": [ "itemIdentifier" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-102-NORTEC-TILES" }
+      } ,
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-201-LMD-PANELS" }
+      } ,
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "BATCH-301-NORTEC-PEDESTALS" }
+      } ,
+      { 
+        "itemIdentifier": { "type": "literal" , "value": "INSTALLED-2022-NORTEC-TILES" }
+      }
+    ]
+  }
+}
+
+--- Query #2 Results ---
+{ "head": {
+    "vars": [ "label" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "label": { "type": "literal" , "xml:lang": "en" , "value": "NORTEC Steel Pedestal H200" }
+      } ,
+      { 
+        "label": { "type": "literal" , "xml:lang": "en" , "value": "LMD Ceiling Panel" }
+      }
+    ]
+  }
+}
+
+--- Query #3 Results ---
+{ "head": {
+    "vars": [ "vehicleID" ]
+  } ,
+  "results": {
+    "bindings": [
+      
+    ]
+  }
+}
+
+--- SELECT * ---
+
+--- Query #2 Results ---
+{ "head": {
+    "vars": [ "item" , "batchID" , "comp" , "quantity" , "availableFromDate" , "loc" , "warehouseName" , "componentLabel" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "item": { "type": "uri" , "value": "http://solid-pod-2/data/items-batch-101" } ,
+        "batchID": { "type": "literal" , "value": "BATCH-101-NORTEC-TILES" } ,
+        "comp": { "type": "uri" , "value": "http://solid-pod-1/data/nortec-cs-tile" } ,
+        "quantity": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "500" } ,
+        "availableFromDate": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2025-05-15" } ,
+        "loc": { "type": "uri" , "value": "http://solid-pod-2/data/locations-frankfurt-wh" } ,
+        "warehouseName": { "type": "literal" , "value": "Frankfurt Warehouse" } ,
+        "componentLabel": { "type": "literal" , "xml:lang": "en" , "value": "NORTEC Raised Floor Tile" }
+      }
+    ]
+  }
+}
+
+--- Query #3 Results ---
+{ "head": {
+    "vars": [ "item" , "itemIdentifier" , "installationDate" , "dueReturnDate" , "bld" , "buildingName" , "city" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "item": { "type": "uri" , "value": "http://solid-pod-2/data/items-installed-mannheim-2022" } ,
+        "itemIdentifier": { "type": "literal" , "value": "INSTALLED-2022-NORTEC-TILES" } ,
+        "installationDate": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2022-12-31" } ,
+        "dueReturnDate": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2032-12-31" } ,
+        "bld": { "type": "uri" , "value": "http://solid-pod-4/data/buildings-mannheim-office" } ,
+        "buildingName": { "type": "literal" , "value": "Mannheim Central Office Tower" } ,
+        "city": { "type": "literal" , "value": "Mannheim" }
+      }
+    ]
+  }
+}
+
+
