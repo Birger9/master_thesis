@@ -6,7 +6,7 @@ from config import BASE_POD_DIR, NUM_PODS, GENERATED_QUERIES_FILE
 def build_nl_to_sparql_prompt(nl_question: str, pod_details: List[Dict]) -> str:
     prompt_head = (
         f"You will translate a natural language question into a Federated SPARQL query for Solid Pods. "
-        f"You will be provided with background information about several Solid Pods that store RDF data and ontologies. "
+        f"You will be provided with background information about several Solid Pods that store both RDF data and ontologies. "
         f"Use that context to generate a correct SPARQL query that reflects the intent of the following natural language question: {{{nl_question}}}\n"
     )
     background_intro = "\nBackground Information:\n"
@@ -58,18 +58,18 @@ def translate_nl_to_sparql(nl_question: str):
     prompt = build_nl_to_sparql_prompt(nl_question, pod_details)
     print(prompt)
 
-    #print("Sending prompt to Azure OpenAI...")
-    #sparql_query = call_llm(client, model, prompt)
+    print("Sending prompt to Azure OpenAI...")
+    sparql_query = call_llm(client, model, prompt)
 
-    #try:
-        #with open(GENERATED_QUERIES_FILE, "a", encoding="utf-8") as f:
-            #f.write(sparql_query)
-            #f.write("\n---\n")
-        #print(f"Generated query appended to {GENERATED_QUERIES_FILE}")
-    #except Exception as e:
-        #print(f"Error writing to {GENERATED_QUERIES_FILE}: {e}")
+    try:
+        with open(GENERATED_QUERIES_FILE, "a", encoding="utf-8") as f:
+            f.write(sparql_query)
+            f.write("\n---\n")
+        print(f"Generated query appended to {GENERATED_QUERIES_FILE}")
+    except Exception as e:
+        print(f"Error writing to {GENERATED_QUERIES_FILE}: {e}")
 
-    #print("--- Generated Federated SPARQL Query ---")
-    #print(sparql_query)
-    #print("--- End Query ---")
-    return "sparql_query"
+    print("--- Generated Federated SPARQL Query ---")
+    print(sparql_query)
+    print("--- End Query ---")
+    return sparql_query
