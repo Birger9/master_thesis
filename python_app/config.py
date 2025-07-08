@@ -13,4 +13,5 @@ NATURAL_LANGUAGE_QUESTION = "Which NORTEC components are available for reuse?"
 GENERATED_RESULTS_FILE = pathlib.Path(__file__).parent / "query_results.txt"
 GENERATED_QUERIES_FILE = pathlib.Path(__file__).parent / "generated_queries.txt"
 GENERATED_NL_FILE = pathlib.Path(__file__).parent / "generated_nl.txt"
+EXAMPLE_NL_TO_SPARQL = pathlib.Path(__file__).parent / "example_nl_to_SPARQL.txt"
 
