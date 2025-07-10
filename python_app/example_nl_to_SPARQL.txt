@@ -1,6 +1,6 @@
-Natural Language Question: Which materials make up the NORTEC raised floor panels?
+Example Natural Language Question: Which materials make up the NORTEC raised floor panels?
 
-Generated Federated SPARQL Query: 
+Example Generated Federated SPARQL Query: 
 
 PREFIX con: <http://solid-pod-0/ontology#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>

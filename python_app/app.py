@@ -15,19 +15,19 @@ with gr.Blocks() as demo:
         history = history or []
         
         # Show the user’s message in the Chat UI.
-        history.append({"role": "user", "content": user_message})
+        #history.append({"role": "user", "content": user_message})
         
         # Translate the user question into a SPARQL query.
-        sparql = translate_nl_to_sparql(user_message, one_shot=one_shot)
+        #sparql = translate_nl_to_sparql(user_message, one_shot=one_shot)
 
         # Show the generated query in the Chat UI.
-        history.append({"role": "user", "content": f"Generated Query\n\n{sparql}\n\n"})
+        #history.append({"role": "user", "content": f"Generated Query\n\n{sparql}\n\n"})
 
         # Translate the SPARQL query to a natural language translation.
-        #nl_explanation = translate_sparql_to_nl(sparql)
+        nl_explanation = translate_sparql_to_nl(user_message, one_shot=one_shot) # Ändra tillbaka till sparql sen från user_message
 
         # Show the natural language translation in the Chat UI.
-        #history.append({"role": "assistant", "content": f"Natural Language Translation\n\n{nl_explanation}"})
+        history.append({"role": "assistant", "content": f"Natural Language Translation\n\n{nl_explanation}"})
         return "", history
 
     msg.submit(pipeline_chat, [msg, one_shot_cb, chatbot], [msg, chatbot])

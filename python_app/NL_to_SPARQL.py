@@ -3,6 +3,13 @@ from llm_utils import load_azure_client, read_ttl_files, call_llm
 from meta_data import POD_METADATA
 from config import BASE_POD_DIR, NUM_PODS, GENERATED_QUERIES_FILE, EXAMPLE_NL_TO_SPARQL
 
+def load_one_shot_nl_to_sparql_example() -> Optional[str]:
+    try:
+        example_str = EXAMPLE_NL_TO_SPARQL.read_text(encoding="utf-8")
+        return example_str
+    except FileNotFoundError:
+        raise FileNotFoundError("One Shot NL to SPARQL example file not found")
+
 def build_nl_to_sparql_prompt(nl_question: str, pod_details: List[Dict], example: Optional[str]) -> str:
     prompt_head = (
         f"You will translate a natural language question into a Federated SPARQL query for Solid Pods. "
@@ -19,7 +26,7 @@ def build_nl_to_sparql_prompt(nl_question: str, pod_details: List[Dict], example
             f"Pod {i} - {pod['name']}: {pod['description']}\n"
             f"Ontology URL: {pod['ontology_url']}\n"
         )
-        pod_urls += f"Pod {i} - {pod['pod_url']}\n"
+        pod_urls += f"Pod {i - 1} - {pod['pod_url']}\n"
         pod_ontology_details += (
             f"Pod {i} - Ontology ({pod['ontology_filename']}):\n"
             f"\n{pod['ontology_content']}\n\n"
@@ -42,7 +49,7 @@ def translate_nl_to_sparql(nl_question: str, one_shot: bool = False):
     print("Reading Pod metadata and ontologies")
 
     pod_details = []
-    for i in range(0, NUM_PODS+1):
+    for i in range(0, NUM_PODS):
         pod_key = f"solid_pod_{i}"
         pod_dir = BASE_POD_DIR / pod_key
         ont = read_ttl_files(pod_dir / "ontology")
@@ -60,16 +67,13 @@ def translate_nl_to_sparql(nl_question: str, one_shot: bool = False):
     
     example_str = None
     if one_shot:
-        if not EXAMPLE_NL_TO_SPARQL.exists():
-            raise FileNotFoundError("One Shot example file not found")
-        example_str = EXAMPLE_NL_TO_SPARQL.read_text(encoding="utf-8")
+        example_str = load_one_shot_nl_to_sparql_example()
 
     print(f"Loaded metadata and ontologies for {len(pod_details)} pods.")
     client, model = load_azure_client()
 
     print("Building LLM prompt...")
-    prompt = build_nl_to_sparql_prompt(nl_question, pod_details, example=example_str)
-    print(prompt)
+    prompt = build_nl_to_sparql_prompt(nl_question, pod_details, example=example_str) 
 
     print("Sending prompt to Azure OpenAI...")
     sparql_query = call_llm(client, model, prompt)

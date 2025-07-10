@@ -1,0 +1,6 @@
+This query connects to the Concular Solid Pod and looks for all inventory items that are marked as available for reuse. For each item, it retrieves its unique identifier and, when available, the date from which the item became ready for reuse.
+---
+This query looks for construction inventory items that have passed fire safety standards by checking for items that meet specific fire-safety criteria. It accesses a remote Concular inventory system, and for each qualifying item, it retrieves its unique identifier. Additionally, if available, the query also gathers the name of the warehouse where the item is stored.
+---
+This query connects to the Concular data source and looks for construction inventory items that meet fire-safety requirements. For each of those items, it retrieves the unique identifier and, when possible, the name of the warehouse where the item is stored.
+---
