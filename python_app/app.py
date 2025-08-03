@@ -1,3 +1,11 @@
+"""
+Main application file for the Gradio web interface.
+
+This script launches a web-based chat interface that allows users to ask natural
+language questions, which are then translated into SPARQL queries and back
+into natural language explanations.
+"""
+
 import gradio as gr
 from NL_to_SPARQL import translate_nl_to_sparql
 from SPARQL_to_NL import translate_sparql_to_nl
@@ -15,16 +23,16 @@ with gr.Blocks() as demo:
         history = history or []
         
         # Show the user’s message in the Chat UI.
-        #history.append({"role": "user", "content": user_message})
+        history.append({"role": "user", "content": user_message})
         
         # Translate the user question into a SPARQL query.
-        #sparql = translate_nl_to_sparql(user_message, one_shot=one_shot)
+        sparql = translate_nl_to_sparql(user_message, one_shot=one_shot)
 
         # Show the generated query in the Chat UI.
-        #history.append({"role": "user", "content": f"Generated Query\n\n{sparql}\n\n"})
+        history.append({"role": "user", "content": f"Generated Query\n\n{sparql}\n\n"})
 
         # Translate the SPARQL query to a natural language translation.
-        nl_explanation = translate_sparql_to_nl(user_message, one_shot=one_shot) # Ändra tillbaka till sparql sen från user_message
+        nl_explanation = translate_sparql_to_nl(sparql, one_shot=one_shot)
 
         # Show the natural language translation in the Chat UI.
         history.append({"role": "assistant", "content": f"Natural Language Translation\n\n{nl_explanation}"})

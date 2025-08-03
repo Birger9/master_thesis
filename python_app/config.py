@@ -1,3 +1,8 @@
+"""
+Central configuration file for the bi-directional SPARQL-NL translation application.
+
+"""
+
 import os
 import pathlib
 from dotenv import load_dotenv

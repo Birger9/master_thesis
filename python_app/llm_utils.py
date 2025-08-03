@@ -1,3 +1,10 @@
+"""
+Utility functions for LLM interaction and file handling.
+
+This module provides helper functions to interact with the Azure OpenAI service and
+reading RDF ontology files (.ttl).
+"""
+
 import os
 import pathlib
 from typing import Dict
@@ -5,6 +12,9 @@ from dotenv import load_dotenv
 from openai import AzureOpenAI
 
 def load_azure_client():
+    """
+    Loads Azure OpenAI credentials and initializes the client.
+    """
     load_dotenv()
     endpoint = os.getenv("AZURE_ENDPOINT")
     key = os.getenv("AZURE_API_KEY")
@@ -24,7 +34,9 @@ def load_azure_client():
     return client, model
 
 def read_ttl_files(directory_path: pathlib.Path) -> Dict[str,str]:
-    """Reads all .ttl files in a directory and returns their content."""
+    """
+    Reads all .ttl files in a directory and returns their content.
+    """
     content_dict: Dict[str, str] = {}
     if not directory_path.is_dir():
         print(f"Warning: Directory not found: {directory_path}")
@@ -37,7 +49,9 @@ def read_ttl_files(directory_path: pathlib.Path) -> Dict[str,str]:
     return content_dict
 
 def call_llm(client: AzureOpenAI, model: str, prompt: str) -> str:
-    """Sends the prompt to Azure OpenAI."""
+    """
+    Sends the prompt to Azure OpenAI.
+    """
     try:
         response = client.chat.completions.create(
             model=model,

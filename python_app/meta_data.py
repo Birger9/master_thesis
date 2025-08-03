@@ -1,3 +1,11 @@
+"""
+Configuration file for Solid Pod metadata.
+
+This information is primarily used to provide essential context to the LLM,
+enabling it to understand the decentralized data system and generate
+accurate federated SPARQL queries.
+"""
+
 POD_METADATA = {
     "solid_pod_0": {
         "name": "Construction",

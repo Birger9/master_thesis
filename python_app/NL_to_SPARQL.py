@@ -1,9 +1,23 @@
+"""
+Translates a natural language question into a federated SPARQL query.
+
+This module is responsible for taking a user's NL question, gathering contextual
+information from multiple Solid Pods (metadata and ontologies), constructing
+a detailed prompt, and using an LLM to generate the corresponding SPARQL query.
+"""
+
 from typing import List, Dict, Optional
 from llm_utils import load_azure_client, read_ttl_files, call_llm
 from meta_data import POD_METADATA
 from config import BASE_POD_DIR, NUM_PODS, GENERATED_QUERIES_FILE, EXAMPLE_NL_TO_SPARQL
 
 def load_one_shot_nl_to_sparql_example() -> Optional[str]:
+    """
+    Loads a pre-written example of an NL-to-SPARQL translation.
+
+    This is used to provide a one-shot demonstration to the LLM to guide it
+    towards generating a query in the correct format and style.
+    """
     try:
         example_str = EXAMPLE_NL_TO_SPARQL.read_text(encoding="utf-8")
         return example_str
@@ -11,6 +25,12 @@ def load_one_shot_nl_to_sparql_example() -> Optional[str]:
         raise FileNotFoundError("One Shot NL to SPARQL example file not found")
 
 def build_nl_to_sparql_prompt(nl_question: str, pod_details: List[Dict], example: Optional[str]) -> str:
+    """
+    Constructs the full prompt for the LLM to translate a question to SPARQL.
+
+    The prompt includes instructions, pod descriptions, pod URLs, full ontology
+    contents for context, the user's NL question, and an optional one-shot example.
+    """
     prompt_head = (
         f"You will translate a natural language question into a Federated SPARQL query for Solid Pods. "
         f"You will be provided with background information about several Solid Pods that store both RDF data and ontologies. "
@@ -46,6 +66,12 @@ def build_nl_to_sparql_prompt(nl_question: str, pod_details: List[Dict], example
     return prompt_head + background_intro + pod_summaries + pod_urls + pod_ontology_details + example_section + prompt_tail
 
 def translate_nl_to_sparql(nl_question: str, one_shot: bool = False):
+    """
+    Handles the translation of a natural language question to SPARQL.
+
+    This main function gathers pod metadata and ontologies, builds the prompt,
+    calls the LLM, and then saves and returns the generated SPARQL query.
+    """
     print("Reading Pod metadata and ontologies")
 
     pod_details = []

@@ -1,4 +1,4 @@
-SPARQLWrapper
-rdflib
+openai
 requests
 dotenv
+gradio
