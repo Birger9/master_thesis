@@ -37,10 +37,10 @@ def build_sparql_to_nl_prompt(sparql_query: str, pod_details: List[Dict], exampl
     )
     background_intro = "\nOntologies:\n"
     summary = ""
-    for i, p in enumerate(pod_details, 1):
+    for i, pod in enumerate(pod_details, 1):
         summary += (
-            f"Pod {i - 1} - {p['name']} ontology ({p['ontology_filename']}):\n\n"
-            f"{p['ontology_content']}\n\n"
+            f"Pod {i - 1} - {pod['name']} ontology ({pod['ontology_filename']}):\n\n"
+            f"{pod['ontology_content']}\n\n"
         )
     prompt_tail = "\nSPARQL Query that you will translate:\n\n" + sparql_query + "\n\n"
     prompt_tail += "Output only the natural language description."
