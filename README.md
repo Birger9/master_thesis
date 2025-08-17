@@ -29,7 +29,7 @@ Steps:
 Query Execution (Testing):
 This part of the pipeline is run manually for testing purposes and is separate from the user-facing application.
 
-1. Run Command: A developer executes python run.py testrun from the command line (PS. the fuseki server needs to on and have data, see How to start fuseki-sever and In the fuseki-server UI).
+1. Run Command: A developer executes python run.py testrun from the command line (PS. the fuseki server needs to be on and have data, see How to start fuseki-sever and In the fuseki-server UI).
 2. Execute Queries: The run_generated_queries function in execute_queries.py reads the queries in the file: generated_queries.txt.
 3. Fetch Results: It sends each query to the Fuseki SPARQL endpoint defined in config.py (It does not matter which endpoint/dataset you query as it will call other endpoints/datasets, so Federated SPARQL queries are supported).
 4. Save Results: The server's response for each query is appended to the query_results.txt file for analysis.
